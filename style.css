@@ -1,0 +1,8 @@
+    table tr td {
+        border: 1px solid grey;
+        padding: 10px;
+    }
+
+    table tr td.selected {
+        background-color: rgb(200, 200, 255);
+    }
