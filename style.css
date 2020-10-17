@@ -1,8 +1,93 @@
+:link,:visited { text-decoration:none }
+ul,ol { list-style:none }
+h1,h2,h3,h4,h5,h6,pre,code { font-size:1em; }
+ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,body,html,p,blockquote,fieldset,input,textarea
+{ margin:0; padding:0; border:none; }
+a img,:link img,:visited img { border:none }
+address { font-style:normal }
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+
+
     table tr td {
-        border: 1px solid grey;
-        padding: 10px;
+        padding: 2.1em;
+        background-color: #a3be8c;
     }
 
     table tr td.selected {
         background-color: rgb(200, 200, 255);
     }
+
+body{
+  font-family:Open Sans,sans-serif;
+  background-color: #2e3440;
+  color: #eceff4;
+}
+
+.header{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #3b4252;
+  padding: 1em;
+  box-sizing: border-box;
+
+}
+
+.right{
+  margin-left: auto;
+}
+
+.right a{
+  background-color: #434c5e;
+  color: #eceff4;
+  padding: 0.8em;
+  border-radius: 1em;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.game-area{
+  display: flex;
+  align-self: center;
+  width: 100%;
+
+}
+.game-area .hover-action{
+  order: 1;
+  margin-top: 50vh;
+  }
+
+.game-area table{
+    order: 2;
+    margin-top: 20vh;
+
+  }
+
+.instructions {
+  display: none;
+  background-color: black;
+  color: white;
+
+}
+
+.hover-action{
+  stroke: #8fbcbb;
+  fill: #8fbcbb;
+  width: 1.5em;
+  height: 1.5em;
+  filter: invert(82%) sepia(3%) saturate(6070%) hue-rotate(172deg) brightness(109%) contrast(56%);
+
+}
+.hover-action:hover + .instructions {
+  display: block;
+}
