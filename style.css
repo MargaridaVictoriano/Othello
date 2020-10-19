@@ -62,32 +62,54 @@ body{
   width: 100%;
 
 }
-.game-area .hover-action{
-  order: 1;
-  margin-top: 50vh;
-  }
 
 .game-area table{
     order: 2;
     margin-top: 20vh;
-
   }
 
-.instructions {
+#no-show {
   display: none;
   background-color: black;
   color: white;
-
 }
 
-.hover-action{
+.show {
+  display: block;
+  background-color: black;
+  color: white;
+}
+
+.click-action{
+  background-image: url("chevron-right-solid.svg");
+  background-repeat: no-repeat;
+  background-position: 50%;
   stroke: #8fbcbb;
   fill: #8fbcbb;
-  width: 1.5em;
-  height: 1.5em;
+  width: 3em;
+  height: 3em;
   filter: invert(82%) sepia(3%) saturate(6070%) hue-rotate(172deg) brightness(109%) contrast(56%);
-
 }
-.hover-action:hover + .instructions {
-  display: block;
+
+
+.div-table {
+  display: table;         
+  width: auto;         
+  background-color: #eee;         
+  border: 1px solid #666666;         
+  border-spacing: 5px; /* cellspacing:poor IE support for  this */
+}
+.row {
+  display: table-row;
+  width: auto;
+  clear: both;
+}
+.gridsquare {
+  float: left; /* fix for  buggy browsers */
+  display: table-column;         
+  width: 5em;
+  height: 5em;         
+  background-color: #a3be8c;
+  border: solid #2e3440;
+  border-radius: 0.5em;
 }

@@ -18,16 +18,14 @@
           <h1>Othello</h1>
         </div>
         <div class="right">
-          <a href="#">Sign In Bitch</a>
+          <a href="#">Sign In</a>
         </div>
     </div>
     <div class="game-area">
-      <div class="hover-action">
-        <object type="image/svg+xml" data="chevron-right-solid.svg"></object>
+      <div class="click-action" id="rotate-me" onclick="instr()">
+    </div>
 
-      </div>
-
-      <div class="instructions">
+      <div class="instructions" id="no-show">
           <h1>Instructions</h1>
           <h2>Basic Rules </h2>
            Each Othello piece has a black side and a white side.
@@ -44,16 +42,10 @@
            <p>-The players agree to finish the game (as a resignation, or a draw). </p>
       </div>
 
-      <table>
-          <tr onclick="getRow(this)"><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td></tr>
-          <tr onclick="getRow(this)"><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td></tr>
-          <tr onclick="getRow(this)"><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td></tr>
-          <tr onclick="getRow(this)"><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td></tr>
-          <tr onclick="getRow(this)"><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td></tr>
-          <tr onclick="getRow(this)"><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td></tr>
-          <tr onclick="getRow(this)"><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td></tr>
-          <tr onclick="getRow(this)"><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td><td onclick="getIndex(this)"></td></tr>
-      </table>
+      <div>
+        <input type="button" value="Generate a table." onclick="genDivs(8)">
+      </div>
+
     </div>
   </div>
 
