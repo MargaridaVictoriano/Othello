@@ -1,3 +1,4 @@
+/* RESET CSS */
 :link,:visited { text-decoration:none }
 ul,ol { list-style:none }
 h1,h2,h3,h4,h5,h6,pre,code { font-size:1em; }
@@ -8,108 +9,93 @@ address { font-style:normal }
 :focus {outline:none;}
 ::-moz-focus-inner {border:0;}
 
-
-    table tr td {
-        padding: 2.1em;
-        background-color: #a3be8c;
-    }
-
-    table tr td.selected {
-        background-color: rgb(200, 200, 255);
-    }
-
-body{
-  font-family:Open Sans,sans-serif;
-  background-color: #2e3440;
-  color: #eceff4;
+/* GENERAL RULES */
+:root {
+    --bg1: #2e3440;
+    --bg2: #3b4252;
+    --bg3: #434c5e;
+    --bg4: #4c566a;
+    --fg1: #d8dee9;
+    --fg2: #e5e9f0;
+    --fg3: #eceff4;
+    --green: #a3be8c;
 }
-
-.header{
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #3b4252;
-  padding: 1em;
-  box-sizing: border-box;
-
+body {
+    background-color: var(--fg1);
+    color: var(--bg1);
+    font-family: 'Nunito', sans-serif;
 }
-
-.right{
-  margin-left: auto;
+h1 {
+    font-family: 'Krona One', sans-serif;
 }
-
-.right a{
-  background-color: #434c5e;
-  color: #eceff4;
-  padding: 0.8em;
-  border-radius: 1em;
-  margin-top: 0.2em;
-  margin-bottom: 0.2em;
+h2 {
+    font-family: 'Krona One', sans-serif;
+    font-size: small;
 }
-
 .container {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content: center;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100vh;
 }
 
-.game-area{
-  display: flex;
-  align-self: center;
-  width: 100%;
-
+/* HEADER */
+.header {
+    background-color: var(--bg1);
+    color: var(--fg1);
+    -webkit-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.3);
+    padding: 2em;
 }
 
-.game-area table{
-    order: 2;
-    margin-top: 20vh;
-  }
-
-#no-show {
-  display: none;
-  background-color: black;
-  color: white;
+#sign-out {
+    display: none;
 }
 
-.show {
-  display: block;
-  background-color: black;
-  color: white;
+/* GAME AREA */
+.game-area {
+    padding: 1.5em;
+    width: 100%;
+    flex: 1;
+    box-sizing: border-box;
 }
 
-.click-action{
-  background-image: url("chevron-right-solid.svg");
-  background-repeat: no-repeat;
-  background-position: 50%;
-  stroke: #8fbcbb;
-  fill: #8fbcbb;
-  width: 3em;
-  height: 3em;
-  filter: invert(82%) sepia(3%) saturate(6070%) hue-rotate(172deg) brightness(109%) contrast(56%);
+/* FOOTER */
+.footer {
+    background-color: var(--fg2);
+    color: var(--bg3);
+    padding: 1.5em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.footer h2 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1em;
 }
 
+/* LOGIN */
+#login {
+    width: 20%;
+    padding: 1em;
+    margin-left: auto;
+    margin-right: auto;
+}
+#username, #password {
+    padding: 1em;
+    margin-bottom: 1em;
+    background-color: var(--fg3);
+    width: 100%;
+    box-sizing: border-box;
+}
+#login button {
+    float: right;
+}
 
-.div-table {
-  display: table;         
-  width: auto;         
-  background-color: #eee;         
-  border: 1px solid #666666;         
-  border-spacing: 5px; /* cellspacing:poor IE support for  this */
+/* CONFIGURATION */
+#config {
+    display: none;
 }
-.row {
-  display: table-row;
-  width: auto;
-  clear: both;
-}
-.gridsquare {
-  float: left; /* fix for  buggy browsers */
-  display: table-column;         
-  width: 5em;
-  height: 5em;         
-  background-color: #a3be8c;
-  border: solid #2e3440;
-  border-radius: 0.5em;
-}
+

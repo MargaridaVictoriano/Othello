@@ -1,53 +1,59 @@
 <!DOCTYPE html>
-<!-- A declaração DOCTYPE declara a versão do HTML usado no documento -->
 <html lang="en">
 <head>
-    <meta charset=UTF-8>        <!-- para caracteres acentuados   -->
-    <title>Othello</title>  <!-- texto na decoração da janela -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Othello</title>
+    <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Nunito&display=swap" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-    <script src="script.js"> </script>
-
+    <script src="script.js"></script>
 </head>
-
 <body>
-
-  <div class="container">
-    <div class="header">
-        <div class="left">
-          <h1>Othello</h1>
+    <div class="container">
+        <div class="header">
+            <h1 id="title">Othello</h1>
+            <div class="id">
+                <h1 id="uname"></h1>
+                <button id="sign-out" type="button" onclick="new login().start()">Sign out</button>
+            </div>
         </div>
-        <div class="right">
-          <a href="#">Sign In</a>
+        <div class="game-area">
+            <div id="login" >
+                <form>
+                    <input type="text" placeholder="Username" id="username">
+                    <p></p>
+                    <input type="password" placeholder="Password" id="password">
+                    <p></p>
+                    <button type="button" onclick="new login(username, password).enter()">Login</button>
+                </form>
+            </div>
+            <div id="config">
+                <form>
+                    <label for="versus">Choose an opponent:</label>
+                    <select name="versus" id="versus">
+                        <option value="computer">Computer</option>
+                        <option value="user">User</option>
+                    </select>
+                    <label for="color">Choose a color:</label>
+                    <select name="color" id="color">
+                        <option value="black">Black</option>
+                        <option value="white">White</option>
+                    </select>
+                    <label for="difficulty">AI level:</label>
+                    <select name="difficulty" id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                    <button type="button" onclick="new config(versus.value, color.value, difficulty.value).beginNewGame()">Start!</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer">
+            <h2>
+                Created by
+            </h2>
+            <p>Eliseu Amaro</p>
+            <p>Margarida Victoriano</p>
         </div>
     </div>
-    <div class="game-area">
-      <div class="click-action" id="rotate-me" onclick="instr()">
-    </div>
-
-      <div class="instructions" id="no-show">
-          <h1>Instructions</h1>
-          <h2>Basic Rules </h2>
-           Each Othello piece has a black side and a white side.
-           <p>On your turn, you place one piece on the board with your color facing up.</p>
-           <p>You must place the piece so that an opponent's piece, or a row of opponent's pieces, is flanked by your pieces.</p>
-           <p>All of the opponent's pieces between your pieces are then turned over to become your color.</p>
-           <h2>Movements</h2>
-           <p>A move consists of placing one piece on an empty square.</p>
-           <h2>How to Capture</h2>
-           <p>You can capture vertical, horizontal, and diagonal rows of pieces. Also, you can capture more than one row at once. </p>
-           <h2>End of the Game</h2>
-           <p>The game ends when:
-           <p>-One player wins, by making his color dominant on the board.</p>
-           <p>-The players agree to finish the game (as a resignation, or a draw). </p>
-      </div>
-
-      <div>
-        <input type="button" value="Generate a table." onclick="genDivs(8)">
-      </div>
-
-    </div>
-  </div>
-
-
 </body>
+</html>

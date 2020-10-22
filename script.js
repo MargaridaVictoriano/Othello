@@ -1,28 +1,45 @@
-function genDivs(v) {
-    var e = document.body;
-    for (var i = 0; i < v; i++) {
-        var row = document.createElement("div");
-        row.className = "row";
-        for (var x = 1; x <= v; x++) {
-            var cell = document.createElement("div");
-            cell.className = "gridsquare";
-            cell.innerText = (i * v) + x;
-            row.appendChild(cell);
-        }
-        e.appendChild(row);
+class login {
+    constructor(username, password) {
+        this.username = username;
+        this.password = password;
     }
-    document.getElementById("code").innerText = e.innerHTML;
+
+    start() {
+        document.getElementById("login").style.display="block";
+        document.getElementById("sign-out").style.display="none";
+        document.getElementById("uname").style.display="none";
+    }
+
+    enter() {
+        this.username = document.getElementById("username").value
+        this.password = document.getElementById("password").value
+
+        if ( this.username == "admin" && this.password == "password") {
+            document.getElementById("uname").innerHTML=this.username;
+            document.getElementById("uname").style.display="block";
+            document.getElementById("sign-out").style.display="block";
+            document.getElementById("login").style.display = "none";
+            new config().start();
+        }
+    }
 }
 
-function instr() {
-    var rules = document.getElementById("no-show");
-    var rotate = document.getElementById("rotate-me");
-
-    if (rules.style.display === "none" || !rules.style.display) {
-        rules.style.display = "block";
-        rotate.style.transform = "rotate(180deg)";
-    } else {
-        rules.style.display = "none";
-        rotate.style.transform = "rotate(0deg)";
+class config {
+    constructor(versus, color, difficulty) {
+        this.versus = versus;
+        this.color = color;
+        this.difficulty = difficulty;
     }
+
+    start() {
+        document.getElementById("config").style.display = "block";
+    }
+
+    beginNewGame() {
+        alert(this.versus + this.color + this.difficulty);
+    }
+}
+
+class main {
+    /**/
 }
