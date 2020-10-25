@@ -94,3 +94,19 @@ class actorPlay {
         curSquare.innerHTML += '<div class=' + this.color.valueOf() + '>';
     }
 }
+
+class minimax {
+  //configuracao inicial do tabuleiro
+  function initialState(list) {
+    var matrix = [];
+    for(var i=0; i<9; i++) {
+        matrix[i] = [];
+        for(var j=0; j<9; j++) {
+        }
+    }
+  }
+}
+  //estado do jogo
+  function getState(list) {
+
+}
