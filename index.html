@@ -19,9 +19,9 @@
         <div class="game-area">
             <div id="login" >
                 <form>
-                    <input type="text" placeholder="Username" id="username">
+                    <label for="username"></label><input type="text" placeholder="Username" id="username">
                     <p></p>
-                    <input type="password" placeholder="Password" id="password">
+                    <label for="password"></label><input type="password" placeholder="Password" id="password">
                     <p></p>
                     <button type="button" onclick="new login(username, password).enter()">Login</button>
                 </form>
@@ -29,22 +29,30 @@
             <div id="config">
                 <form>
                     <label for="versus">Choose an opponent:</label>
+                    <p></p>
                     <select name="versus" id="versus">
                         <option value="computer">Computer</option>
                         <option value="user">User</option>
                     </select>
+                    <p></p>
                     <label for="color">Choose a color:</label>
+                    <p></p>
                     <select name="color" id="color">
                         <option value="black">Black</option>
                         <option value="white">White</option>
                     </select>
+                    <p></p>
                     <label for="difficulty">AI level:</label>
+                    <p></p>
                     <select name="difficulty" id="difficulty">
                         <option value="easy">Easy</option>
                         <option value="hard">Hard</option>
                     </select>
+                    <p></p>
                     <button type="button" onclick="new config(versus.value, color.value, difficulty.value).beginNewGame()">Start!</button>
                 </form>
+            </div>
+            <div id="table">
             </div>
         </div>
         <div class="footer">

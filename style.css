@@ -34,7 +34,6 @@ h2 {
 }
 .container {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     height: 100vh;
 }
@@ -47,10 +46,23 @@ h2 {
     -moz-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.3);
     box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.3);
     padding: 2em;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-height: 1em;
+}
+
+.id {
+    margin-left: auto;
+    display: flex;
+    vertical-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 #sign-out {
     display: none;
+    margin-left: 1em;
 }
 
 /* GAME AREA */
@@ -59,7 +71,11 @@ h2 {
     width: 100%;
     flex: 1;
     box-sizing: border-box;
+    display: flex;
 }
+
+/* TABLE */
+
 
 /* FOOTER */
 .footer {
@@ -69,6 +85,7 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    width: 100%;
 }
 .footer h2 {
     width: 100%;
@@ -97,5 +114,17 @@ h2 {
 /* CONFIGURATION */
 #config {
     display: none;
+    width: 20%;
+    padding: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
+#config select {
+    margin-bottom: 1em;
+}
+#config button {
+    float: bottom;
+}
+
 
