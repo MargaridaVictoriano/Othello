@@ -75,7 +75,48 @@ h2 {
 }
 
 /* TABLE */
+#table {
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 33em;
+    height: 33em;
+    padding: 2em;
+    border-radius: 1em;
+}
 
+
+#inner-table div {
+    width: 33em;
+    height: calc(4em + 2px);
+}
+#inner-table div div {
+    width: 4em;
+    height: 4em;
+    margin: 1px;
+    background: var(--green);
+    border-radius: 0.8em;
+    float: left;
+    display: flex;
+    justify-content: center;
+}
+
+.whites {
+    border-radius: 50% !important;
+    background: var(--fg3) !important;
+    font-size: 0.9em;
+    align-self: center;
+}
+.blacks {
+    border-radius: 50% !important;
+    background: var(--bg1) !important;
+    font-size: 0.9em;
+    align-self: center;
+}
+
+.selectable {
+    cursor: pointer;
+}
 
 /* FOOTER */
 .footer {
