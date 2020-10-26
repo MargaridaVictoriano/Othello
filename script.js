@@ -55,28 +55,30 @@ class config {
 
     // isto deve estar noutro sitio
     genDivs() {
-        const table = document.getElementById("table");
+        let table = document.getElementById("table");
         table.style.display = "flex";
-        table.innerHTML += '<div id="game-info">';
-        table.innerHTML += '<div id="inner-table">';
-        const innerTable = document.getElementById("inner-table");
-        const gameInfo = document.getElementById("game-info");
 
         for (let i = 0; i < 8; i++) {
-            innerTable.innerHTML += '<div id=row' + i + '>';
+
+            let row = document.createElement("div");
+            table.appendChild(row);
+            row.setAttribute("id","row" + i);
             let curRow = document.getElementById("row" + i);
 
             for (let j = 0; j < 8; j++) {
-                curRow.innerHTML += '<div onclick="new actorPlay(this.color).start(id)" id=square' + i + j + '>' + '</div>';
+
+                let piece = document.createElement("div");
+
+                piece.setAttribute("onclick","new actorPlay(this.color).start(id)");
+                piece.setAttribute("id","square" + i + j);
+                curRow.appendChild(piece);
                 let curSquare = document.getElementById("square" + i + j);
 
                 if ((i === 3 && j === 4) || (i === 4 && j === 3)) {
-                    curSquare.innerHTML += '<div class="whites">';
+                    curSquare.setAttribute("class","whites");
                 } else if ((i === 3 && j === 3) || (i === 4 && j === 4)) {
-                    curSquare.innerHTML += '<div class="blacks">';
-                }
+                    curSquare.setAttribute("class","blacks");                }
             }
-            innerTable.innerHTML += '</div>';
         }
     }
 }
@@ -95,18 +97,20 @@ class actorPlay {
     }
 }
 
-class minimax {
+/*class minimax {
   //configuracao inicial do tabuleiro
   function initialState(list) {
     var matrix = [];
-    for(var i=0; i<9; i++) {
+    for(var i=0; i<8; i++) {
         matrix[i] = [];
-        for(var j=0; j<9; j++) {
+        for(var j=0; j<8; j++) {
+
         }
     }
   }
 }
+*/
   //estado do jogo
-  function getState(list) {
+  //function getState(list) {
 
-}
+//}

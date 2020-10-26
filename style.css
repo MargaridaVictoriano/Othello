@@ -86,11 +86,11 @@ h2 {
 }
 
 
-#inner-table div {
+#table div {
     width: 33em;
     height: calc(4em + 2px);
 }
-#inner-table div div {
+#table div div {
     width: 4em;
     height: 4em;
     margin: 1px;
