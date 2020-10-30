@@ -1,13 +1,37 @@
 /* RESET CSS */
-:link,:visited { text-decoration:none }
-ul,ol { list-style:none }
-h1,h2,h3,h4,h5,h6,pre,code { font-size:1em; }
-ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,body,html,p,blockquote,fieldset,input,textarea
-{ margin:0; padding:0; border:none; }
-a img,:link img,:visited img { border:none }
-address { font-style:normal }
-:focus {outline:none;}
-::-moz-focus-inner {border:0;}
+:link, :visited {
+    text-decoration: none
+}
+
+ul, ol {
+    list-style: none
+}
+
+h1, h2, h3, h4, h5, h6, pre, code {
+    font-size: 1em;
+}
+
+ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, body, html, p, blockquote, fieldset, input, textarea {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+a img, :link img, :visited img {
+    border: none
+}
+
+address {
+    font-style: normal
+}
+
+:focus {
+    outline: none;
+}
+
+::-moz-focus-inner {
+    border: 0;
+}
 
 /* GENERAL RULES */
 :root {
@@ -20,18 +44,22 @@ address { font-style:normal }
     --fg3: #eceff4;
     --green: #a3be8c;
 }
+
 body {
     background-color: var(--fg1);
     color: var(--bg1);
     font-family: 'Nunito', sans-serif;
 }
+
 h1 {
     font-family: 'Krona One', sans-serif;
 }
+
 h2 {
     font-family: 'Krona One', sans-serif;
     font-size: small;
 }
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -42,9 +70,9 @@ h2 {
 .header {
     background-color: var(--bg1);
     color: var(--fg1);
-    -webkit-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.3);
-    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.3);
     padding: 2em;
     display: flex;
     align-items: center;
@@ -90,6 +118,7 @@ h2 {
     width: 33em;
     height: calc(4em + 2px);
 }
+
 #table div div {
     width: 4em;
     height: 4em;
@@ -107,11 +136,17 @@ h2 {
     font-size: 0.9em;
     align-self: center;
 }
+
 .blacks {
     border-radius: 50% !important;
     background: var(--bg1) !important;
     font-size: 0.9em;
     align-self: center;
+}
+
+.playable {
+    background-image: linear-gradient(0deg, #a3be8c 25%, #2e3440 25%, #2e3440 50%, #a3be8c 50%, #a3be8c 75%, #2e3440 75%, #2e3440 100%) !important;
+    background-size: 40.00px 40.00px !important;
 }
 
 .selectable {
@@ -128,6 +163,7 @@ h2 {
     justify-content: space-evenly;
     width: 100%;
 }
+
 .footer h2 {
     width: 100%;
     text-align: center;
@@ -141,6 +177,7 @@ h2 {
     margin-left: auto;
     margin-right: auto;
 }
+
 #username, #password {
     padding: 1em;
     margin-bottom: 1em;
@@ -148,6 +185,7 @@ h2 {
     width: 100%;
     box-sizing: border-box;
 }
+
 #login button {
     float: right;
 }
@@ -161,9 +199,11 @@ h2 {
     margin-right: auto;
     text-align: center;
 }
+
 #config select {
     margin-bottom: 1em;
 }
+
 #config button {
     float: bottom;
 }
