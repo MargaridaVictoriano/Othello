@@ -37,7 +37,7 @@
                     <p></p>
                     <label for="color">Choose a color:</label>
                     <p></p>
-                    <select name="color" id="color">
+                    <select name="color" id="color" onchange="getColor(this)">
                         <option value="blacks">Black</option>
                         <option value="whites">White</option>
                     </select>
@@ -49,7 +49,7 @@
                         <option value="hard">Hard</option>
                     </select>
                     <p></p>
-                    <button type="button" onclick="new config(versus.value, color.value, difficulty.value).beginNewGame()">Start!</button>
+                    <button class="begin-game" type="button" onclick="new config().beginNewGame()">Start!</button>
                 </form>
             </div>
             <div id="table">

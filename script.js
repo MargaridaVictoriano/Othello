@@ -13,7 +13,7 @@ class login {
         // Makes login form Visible
         document.getElementById("login").style.display = "block";
         // Removes the table
-        this.removeDivs('inner-table');
+        this.removeDivs('table');
     }
 
     enter() {
@@ -33,24 +33,31 @@ class login {
     removeDivs(elementId) {
         // Removes an element and it's children from the document
         const element = document.getElementById(elementId);
-        element.parentNode.removeChild(element);
+        while(element.firstChild){
+          element.removeChild(element.firstChild);
+        }
     }
 }
 
 class config {
-    constructor(versus, color, difficulty) {
-        this.versus = versus;
-        this.color = color;
-        this.difficulty = difficulty;
-    }
+
+  constructor(){
+    this.v = "computer";
+    this.c = "blacks";
+    this.d = "easy";
+  }
 
     start() {
         document.getElementById("config").style.display = "block";
     }
 
     beginNewGame() {
+        this.v = document.getElementById("versus").value;
+        this.c = document.getElementById("color").value;
+        this.d = document.getElementById("difficulty").value;
         document.getElementById("config").style.display = "none";
         this.genDivs();
+        console.log(this.v + " " + " " + this.c + " " + this.d);
     }
 
     // isto deve estar noutro sitio
@@ -59,7 +66,6 @@ class config {
         table.style.display = "flex";
 
         for (let i = 0; i < 8; i++) {
-
             let row = document.createElement("div");
             table.appendChild(row);
             row.setAttribute("id","row" + i);
@@ -69,31 +75,44 @@ class config {
 
                 let piece = document.createElement("div");
 
-                piece.setAttribute("onclick","new actorPlay(this.color).start(id)");
+                piece.setAttribute("onclick","new actorPlay(id" + "," + this.c + ")" + ".start()");
                 piece.setAttribute("id","square" + i + j);
                 curRow.appendChild(piece);
                 let curSquare = document.getElementById("square" + i + j);
 
                 if ((i === 3 && j === 4) || (i === 4 && j === 3)) {
-                    curSquare.setAttribute("class","whites");
+                    let whiteSquare = document.createElement("div");
+                    curSquare.appendChild(whiteSquare);
+                    whiteSquare.className = "whites";
                 } else if ((i === 3 && j === 3) || (i === 4 && j === 4)) {
-                    curSquare.setAttribute("class","blacks");                }
+                    let blackSquare = document.createElement("div");
+                    curSquare.appendChild(blackSquare);
+                    blackSquare.className = "blacks";
+                  }
             }
         }
     }
 }
-
+function getColor(selectObject) {
+  const input = document.querySelector('input.js-addcart-detail');
+  input.value = selectObject.value;
+  console.log(input);
+}
 class actorPlay {
-    constructor(color) {
-        this.color = color;
-    }
 
-    start(id) {
-        let posX = id.slice(6,7);
-        let posY = id.slice(7,8);
+    constructor(id,color){
+      this.id = id;
+      this.color = color;
+    }
+    start() {
+        let posX = this.id.slice(6,7);
+        let posY = this.id.slice(7,8);
 
         let curSquare = document.getElementById("square" + posX + posY);
-        curSquare.innerHTML += '<div class=' + this.color.valueOf() + '>';
+        let blackSquare = document.createElement("div");
+        curSquare.appendChild(blackSquare);
+        blackSquare.className = this.color;
+        alert(this.color);
     }
 }
 
