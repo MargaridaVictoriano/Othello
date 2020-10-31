@@ -148,7 +148,10 @@ h2 {
     background-image: linear-gradient(0deg, #a3be8c 25%, #2e3440 25%, #2e3440 50%, #a3be8c 50%, #a3be8c 75%, #2e3440 75%, #2e3440 100%) !important;
     background-size: 40.00px 40.00px !important;
 }
-
+.whitePoints {
+  display: block;
+  width: 100px;
+}
 .selectable {
     cursor: pointer;
 }

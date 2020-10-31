@@ -1,3 +1,41 @@
+window.onload = function() {
+  const punctuation = new Punctuation("points");
+}
+
+class Punctuation {
+  constructor(parentId) {
+    const parent = document.getElementById(parentId);
+    const whiteCounter = document.createElement("div");
+    const blackCounter = document.createElement("div");
+    const reset = document.createElement("div");
+
+    this.display = document.createElement("div");
+    this.pointsWhite = 0;
+    this.pointsBlack = 0;
+
+    parent.appendChild(whiteCounter);
+    parent.appendChild(blackCounter);
+    parent.appendChild(reset);
+
+    whiteCounter.innerText = this.pointsWhite;
+    blackCounter.innerText = this.pointsBlack;
+  }
+  incrementWhite() {
+    this.pointsWhite++;
+    this.display.innerText = this.pointsWhite;
+  }
+  incrementBlack() {
+    this.pointsBlack++;
+    this.display.innerText = this.pointsBlack;
+  }
+  reset() {
+    this.pointsWhite = 0;
+    this.pointsBlack = 0;
+    this.display.innerText = this.pointsWhite;
+    this.display.innerText = this.pointsBlack;
+  }
+}
+
 // Initial state
 let color;
 let counter = 1;
@@ -327,7 +365,7 @@ function canPlay(i, j, player, opponent) {
     }
     if (mi >= 0 && mj <= 7 && discs[mi][mj] === player && c > 0) return true;
 
-    //move down right ?
+    //move down right
     mi = i + 1;
     mj = j - 1;
     c = 0;
@@ -338,7 +376,7 @@ function canPlay(i, j, player, opponent) {
     }
     if (mi <= 7 && mj >= 0 && discs[mi][mj] === player && c > 0) return true;
 
-    //move down left ?
+    //move down left
     mi = i + 1;
     mj = j + 1;
     c = 0;
@@ -426,6 +464,7 @@ class config {
         document.getElementById("config").style.display = "none";
         color = this.color;
         drawTable();
+        new Punctuation("points");
     }
 }
 
@@ -496,7 +535,6 @@ class actorPlay {
         let nBlacks = 0;
         let winsWhite = 0;
         let winsBlack = 0;
-        const points = document.getElementById("points");
 
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
@@ -509,20 +547,12 @@ class actorPlay {
             }
         }
 
-        const whitePoints = document.createElement("div");
-        points.appendChild(whitePoints);
-        whitePoints.className = "white-points";
-        if(nWhites > nBlacks) {
-            ++winsWhite;
-            whitePoints.innerHTML = "White:" + winsWhite;
+        if(nWhites >= nBlacks) {
+            Punctuation.incrementWhite();
         }
 
-        const blackPoints = document.createElement("div");
-        points.appendChild(blackPoints);
-        blackPoints.className = "black-points";
-        if(nBlacks > nWhites) {
-            winsBlack += 1;
-            blackPoints.innerHTML = "Black:" + winsBlack;
+        if(nBlacks >= nWhites) {
+            Punctuation.incrementBlack();
         }
     }
 
