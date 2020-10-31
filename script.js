@@ -1,5 +1,6 @@
 // Initial state
 let color;
+let counter = 1;
 
 let discs = [
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -44,11 +45,11 @@ function drawTable() {
         let curRow = document.getElementById("row" + i);
 
         for (let j = 0; j < 8; j++) {
-            if(canPlay(i, j, player, opponent) && discs[i][j] === 0){
+            if (canPlay(i, j, player, opponent) && discs[i][j] === 0) {
                 discs[i][j] = 3;
             }
-            if(!(canPlay(i, j, player, opponent)) && discs[i][j] === 3 && discs[i][j] != 1 && discs[i][j] != 2){
-              discs[i][j] = 0;
+            if (!(canPlay(i, j, player, opponent)) && discs[i][j] === 3 && discs[i][j] !== 1 && discs[i][j] !== 2) {
+                discs[i][j] = 0;
             }
             const piece = document.createElement("div");
 
@@ -66,9 +67,9 @@ function drawTable() {
                 curSquare.appendChild(blackSquare);
                 blackSquare.className = "blacks";
             } else if (discs[i][j] === 3) {
-                  piece.onclick = function () {
-                  new actorPlay(color).updateState(i, j);
-              };
+                piece.onclick = function () {
+                    new actorPlay(color).updateState(i, j);
+                };
                 curSquare.className = "playable";
             }
         }
@@ -76,7 +77,7 @@ function drawTable() {
 }
 
 function flip(toFlip, player) {
-    for(let i = 0; i < toFlip.length; i++) {
+    for (let i = 0; i < toFlip.length; i++) {
         let point = toFlip.pop();
         discs[point.valueI][point.valueJ] = player;
         console.log(point.valueI + " " + point.valueJ);
@@ -84,186 +85,183 @@ function flip(toFlip, player) {
     drawTable();
 }
 
-let toBeFlipped = [];
+class flipplin {
+    reversePlay(i, j, player, opponent) {
+        let toBeFlipped = [];
+        let mi, mj, c;
+        // moving right IT WORKS YAY
+        mi = i - 1;
+        mj = j;
+        c = 0;
+        while (mi > 0 && discs[mi][mj] === opponent) {
+            mi--;
+            c++;
+        }
+        if (mi >= 0 && discs[mi][mj] === player && c > 0) {
+            mi++;
+            console.log("YAY moving right");
+            while (discs[mi][mj] === opponent) {
+                toBeFlipped.push({valueI: mi, valueJ: mj});
+                mi++;
+                console.log(toBeFlipped.toString());
+                console.log(discs);
+            }
+        }
+        //moving left YAY IT WORKS
+        mi = i + 1;
+        mj = j;
+        c = 0;
+        while (mi < 7 && discs[mi][mj] === opponent) {
+            mi++;
+            c++;
+        }
+        if (mi <= 7 && discs[mi][mj] === player && c > 0) {
+            console.log("YAY moving left");
+            mi--;
+            while (discs[mi][mj] === opponent) {
+                toBeFlipped.push({valueI: mi, valueJ: mj});
+                mi--;
+                //  console.log(toBeFlipped.toString());
+                //  console.log(discs);
+            }
+        }
+        // moving down IT WORKS YAY
+        mi = i;
+        mj = j - 1;
+        c = 0;
+        while (mi > 0 && discs[mi][mj] === opponent) {
+            mj--;
+            c++;
+        }
+        if (mi >= 0 && discs[mi][mj] === player && c > 0) {
+            console.log("YAY moving down");
+            mj++;
+            while (discs[mi][mj] === opponent) {
+                toBeFlipped.push({valueI: mi, valueJ: mj});
+                mj++;
+                // console.log(toBeFlipped.toString());
+                // console.log(discs);
+            }
+        }
 
-function reversePlay(i,j,player,opponent){
-  let mi, mj, c;
-  // moving right IT WORKS YAY
-  mi = i - 1;
-  mj = j;
-  c = 0;
-  while (mi > 0 && discs[mi][mj] === opponent) {
-      mi--;
-      c++;
-  }
-  if (mi >= 0 && discs[mi][mj] === player && c > 0) {
-      mi++;
-      console.log("YAY moving right");
-      while (discs[mi][mj] == opponent) {
-        toBeFlipped.push({valueI:mi, valueJ:mj});
-        mi++;
-        console.log(toBeFlipped.toString());
-        console.log(discs);
-      }
-      flip(toBeFlipped,player);
-      drawTable();
-    }
-    //moving left YAY IT WORKS
-    mi = i + 1;
-    mj = j;
-    c = 0;
-    while (mi < 7 && discs[mi][mj] === opponent) {
-        mi++;
-        c++;
-    }
-    if (mi <= 7 && discs[mi][mj] === player && c > 0) {
-      console.log("YAY moving left");
-      mi--;
-      while (discs[mi][mj] == opponent) {
-        toBeFlipped.push({valueI:mi, valueJ:mj});
-        mi--;
-      //  console.log(toBeFlipped.toString());
-      //  console.log(discs);
-      }
-      flip(toBeFlipped,player);
-    }
-    // moving down IT WORKS YAY
-    mi = i;
-    mj = j - 1;
-    c = 0;
-    while (mi > 0 && discs[mi][mj] === opponent) {
-        mj--;
-        c++;
-    }
-    if (mi >= 0 && discs[mi][mj] === player && c > 0) {
-      console.log("YAY moving down");
-      mj++;
-      while (discs[mi][mj] == opponent) {
-        toBeFlipped.push({valueI:mi, valueJ:mj});
-        mj++;
-        // console.log(toBeFlipped.toString());
-        // console.log(discs);
-      }
-      flip(toBeFlipped,player);
-    }
+        //move up IT WORKS YAY !
+        mi = i;
+        mj = j + 1;
+        c = 0;
+        while (mj < 7 && discs[mi][mj] === opponent) {
+            mj++;
+            c++;
+        }
+        if (mj <= 7 && discs[mi][mj] === player && c > 0) {
+            console.log("YAY moving up");
+            mj--;
+            while (discs[mi][mj] === opponent) {
+                toBeFlipped.push({valueI: mi, valueJ: mj});
+                mj--;
+                // console.log(toBeFlipped.toString());
+                // console.log(discs);
+            }
+        }
 
-    //move up IT WORKS YAY !
-    mi = i;
-    mj = j + 1;
-    c = 0;
-    while (mj < 7 && discs[mi][mj] === opponent) {
-        mj++;
-        c++;
-    }
-    if (mj <= 7 && discs[mi][mj] === player && c > 0) {
-      console.log("YAY moving up");
-      mj--;
-      while (discs[mi][mj] == opponent) {
-        toBeFlipped.push({valueI:mi, valueJ:mj});
-        mj--;
-        // console.log(toBeFlipped.toString());
-        // console.log(discs);
-      }
-      flip(toBeFlipped,player);
-    }
+        //move up right YAY WOKRS
+        mi = i - 1;
+        mj = j + 1;
+        c = 0;
+        while (mi > 0 && mj < 7 && discs[mi][mj] === opponent) {
+            mi--;
+            mj++;
+            c++;
+        }
+        if (mi >= 0 && mj <= 7 && discs[mi][mj] === player && c > 0) {
+            console.log("YAY moving up right");
+            mj--;
+            mi++;
+            while (discs[mi][mj] === opponent) {
+                toBeFlipped.push({valueI: mi, valueJ: mj});
+                mj--;
+                mi++;
+                // console.log(toBeFlipped.toString());
+                // console.log(discs);
+            }
+        }
 
-    //move up right YAY WOKRS
-    mi = i - 1;
-    mj = j + 1;
-    c = 0;
-    while (mi > 0 && mj < 7 && discs[mi][mj] === opponent) {
-        mi--;
-        mj++;
-        c++;
-    }
-    if (mi >= 0 && mj <= 7 && discs[mi][mj] === player && c > 0) {
-      console.log("YAY moving up right");
-      mj--;
-      mi++;
-      while (discs[mi][mj] == opponent) {
-        toBeFlipped.push({valueI:mi, valueJ:mj});
-        mj--;
-        mi++;
-        // console.log(toBeFlipped.toString());
-        // console.log(discs);
-      }
-      flip(toBeFlipped,player);
-    }
+        //move up left YAY IT WORKS
+        mi = i + 1;
+        mj = j + 1;
+        c = 0;
+        while (mi < 7 && mj < 7 && discs[mi][mj] === opponent) {
+            mi++;
+            mj++;
+            c++;
+        }
+        if (mi <= 7 && mj <= 7 && discs[mi][mj] === player && c > 0) {
+            console.log("YAY moving up left");
+            mi--;
+            mj--;
+            while (discs[mi][mj] === opponent) {
+                toBeFlipped.push({valueI: mi, valueJ: mj});
+                mi--;
+                mj--;
+                // console.log(toBeFlipped.toString());
+                // console.log(discs);
+            }
+        }
 
-    //move up left YAY IT WORKS
-    mi = i + 1;
-    mj = j + 1;
-    c = 0;
-    while (mi < 7 && mj < 7 && discs[mi][mj] === opponent) {
-        mi++;
-        mj++;
-        c++;
-    }
-    if (mi <= 7 && mj <= 7 && discs[mi][mj] === player && c > 0){
-      console.log("YAY moving up left");
-      mi--;
-      mj--;
-      while (discs[mi][mj] == opponent) {
-        toBeFlipped.push({valueI:mi, valueJ:mj});
-        mi--;
-        mj--;
-        // console.log(toBeFlipped.toString());
-        // console.log(discs);
-      }
-      flip(toBeFlipped,player);
-    }
+        //move down right YAY WORKS
+        mi = i - 1;
+        mj = j - 1;
+        c = 0;
+        while (mi > 0 && mj > 0 && discs[mi][mj] === opponent) {
+            mi--;
+            mj--;
+            c++;
+        }
+        if (mi >= 0 && mj >= 0 && discs[mi][mj] === player && c > 0) {
+            console.log("YAY moving down right");
+            mi++;
+            mj++;
+            while (discs[mi][mj] === opponent) {
+                toBeFlipped.push({valueI: mi, valueJ: mj});
+                mi++;
+                mj++;
+                // console.log(toBeFlipped.toString());
+                // console.log(discs);
+            }
+        }
 
-    //move down right YAY WORKS
-    mi = i - 1;
-    mj = j - 1;
-    c = 0;
-    while (mi > 0 && mj > 0 && discs[mi][mj] === opponent) {
-        mi--;
-        mj--;
-        c++;
-    }
-    if (mi >= 0 && mj >= 0 && discs[mi][mj] === player && c > 0){
-      console.log("YAY moving down right");
-      mi++;
-      mj++;
-      while (discs[mi][mj] == opponent) {
-        toBeFlipped.push({valueI:mi, valueJ:mj});
-        mi++;
-        mj++;
-        // console.log(toBeFlipped.toString());
-        // console.log(discs);
-      }
-      flip(toBeFlipped,player);
-    }
+        //moving down left YAY it works
+        mi = i + 1;
+        mj = j - 1;
+        c = 0;
+        while (mi < 7 && mj > 0 && discs[mi][mj] === opponent) {
+            mi++;
+            mj--;
+            c++;
+        }
+        if (mi <= 7 && mj >= 0 && discs[mi][mj] === player && c > 0) {
+            console.log("YAY moving down left");
+            mi--;
+            mj++;
+            while (discs[mi][mj] === opponent) {
+                toBeFlipped.push({valueI: mi, valueJ: mj});
+                mi--;
+                mj++;
+                // console.log(toBeFlipped.toString());
+                // console.log(discs);
+            }
+        }
 
-    //moving down left YAY it works
-    mi = i + 1;
-    mj = j - 1;
-    c = 0;
-    while (mi < 7 && mj > 0 && discs[mi][mj] === opponent) {
-        mi++;
-        mj--;
-        c++;
+        flip(toBeFlipped, player);
     }
-    if (mi <= 7 && mj >= 0 && discs[mi][mj] === player && c > 0){
-      console.log("YAY moving down left");
-      mi--;
-      mj++;
-      while (discs[mi][mj] == opponent) {
-        toBeFlipped.push({valueI:mi, valueJ:mj});
-        mi--;
-        mj++;
-        // console.log(toBeFlipped.toString());
-        // console.log(discs);
-      }
-      flip(toBeFlipped,player);
-    }
+}
 
-
- }
 // returns true is a position can be played
 function canPlay(i, j, player, opponent) {
     let mi, mj, c;
+
+    if(discs[i][j] === opponent || discs[i][j] === player) {
+        return false;
+    }
 
     // moving right
     mi = i - 1;
@@ -354,20 +352,21 @@ function canPlay(i, j, player, opponent) {
     return false;
 }
 
-function hasMoves(discs,player,opponent){
-  let counter = 0;
-  for(let i = 0; i < 8; i++){
-    for(let j = 0; j < 8; j++){
-      if(canPlay(i,j,player,opponent)){
-        counter++;
-      }
+function hasMoves(discs, player, opponent) {
+    let counter = 0;
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+            if (canPlay(i, j, player, opponent) && (discs[i][j] === 3) ) {
+                counter++;
+            }
+        }
     }
-  }
-  if(counter > 0){
-    //alert(counter);
-    return true;
-  }
+    if (counter > 0) {
+        //alert(counter);
+        return true;
+    }
 }
+
 class login {
     constructor(username, password) {
         this.username = username;
@@ -436,6 +435,21 @@ class actorPlay {
         this.color = color;
     }
 
+    restartGame() {
+        // Resets board
+        discs = [
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 2, 1, 0, 0, 0],
+            [0, 0, 0, 1, 2, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]
+        ];
+        drawTable();
+    }
+
     checkPlayer() {
         if (this.color === "whites") {
             return 2;
@@ -453,67 +467,81 @@ class actorPlay {
     }
 
     updateState(posI, posJ) {
-        if(canPlay(posI, posJ, this.checkPlayer(), this.checkOpponent())) {
-            discs[posI][posJ] = this.checkPlayer();
-            drawTable(this.color);
-        }
-        reversePlay(posI, posJ, this.checkPlayer(), this.checkOpponent());
+        if((this.checkPlayer() === 1 && counter % 2 === 1) || (this.checkPlayer() === 2 && counter % 2 === 0)) {
+            if (canPlay(posI, posJ, this.checkPlayer(), this.checkOpponent())) {
+                discs[posI][posJ] = this.checkPlayer();
+                drawTable();
+            }
 
-        if(hasMoves(discs,this.checkPlayer(),this.checkOpponent()) && hasMoves(discs,this.checkOpponent(),this.checkPlayer())){
-          this.easy();
-          drawTable();
-        }
-        if(!(hasMoves(discs,this.checkPlayer(),this.checkOpponent()) && hasMoves(discs,this.checkOpponent(),this.checkPlayer()))){
-          alert("YAY DONE");
-          this.ponctuation(discs);
-          new login().start();
+            new flipplin().reversePlay(posI, posJ, this.checkPlayer(), this.checkOpponent());
+            drawTable();
 
+            setTimeout(function(){
+                console.log("CPU thinking");
+            }, 1000000);
+
+            ++counter;
+            this.easy();
+
+            if (hasMoves(discs, this.checkPlayer(), this.checkOpponent()) && hasMoves(discs, this.checkOpponent(), this.checkPlayer())) {
+                alert("YAY DONE");
+                this.punctuation();
+                this.restartGame();
+            }
         }
     }
 
-    ponctuation(discs){
-      let nWhites = 0;
-      let nBlacks = 0;
-      const points = document.getElementById("points");
+    punctuation() {
+        let nWhites = 0;
+        let nBlacks = 0;
+        let winsWhite = 0;
+        let winsBlack = 0;
+        const points = document.getElementById("points");
 
-      for(let i = 0; i < 8; i++){
-        for(let j = 0; j < 8; j++){
-          if(discs[i][j] == 1){
-            nBlacks++;
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                if (discs[i][j] === 1) {
+                    nBlacks++;
 
-          }
-          else if(discs[i][j] == 2){
-            nWhites++;
-          }
-        }
-      }
-
-      let whitePoints = document.createElement("div");
-      points.appendChild(whitePoints);
-      whitePoints.className = "white-points";
-      whitePoints.innerHTML = nWhites;
-      let blackPoints = document.createElement("div");
-      points.appendChild(blackPoints);
-      blackPoints.className = "black-points";
-      blackPoints.innerHTML = nBlacks;
-
-    }
-
-
-    easy() {
-        let cpu = [];
-
-        for(let i = 0; i < 8; i++) {
-            for(let j = 0; j < 8; j++) {
-                if(canPlay(i, j, this.checkOpponent(), this.checkPlayer()) && discs[i][j] != this.checkPlayer()) {
-                    cpu.push({valueI:i, valueJ:j});
+                } else if (discs[i][j] === 2) {
+                    nWhites++;
                 }
             }
         }
 
-        const random = Math.floor(Math.random() * cpu.length);
+        const whitePoints = document.createElement("div");
+        points.appendChild(whitePoints);
+        whitePoints.className = "white-points";
+        if(nWhites > nBlacks) {
+            ++winsWhite;
+            whitePoints.innerHTML = "White:" + winsWhite;
+        }
 
-        discs[cpu[random].valueI][cpu[random].valueJ] = this.checkOpponent();
-        //drawTable();
+        const blackPoints = document.createElement("div");
+        points.appendChild(blackPoints);
+        blackPoints.className = "black-points";
+        if(nBlacks > nWhites) {
+            winsBlack += 1;
+            blackPoints.innerHTML = "Black:" + winsBlack;
+        }
+    }
+
+    easy() {
+        if((this.checkOpponent() === 1 && counter % 2 === 1) || (this.checkOpponent() === 2 && counter % 2 === 0)) {
+            let cpu = [];
+            for (let i = 0; i < 8; i++) {
+                for (let j = 0; j < 8; j++) {
+                    if (canPlay(i, j, this.checkOpponent(), this.checkPlayer())) {
+                        cpu.push({valueI: i, valueJ: j});
+                    }
+                }
+            }
+            const random = Math.floor(Math.random() * cpu.length);
+            discs[cpu[random].valueI][cpu[random].valueJ] = this.checkOpponent();
+            console.log("CPU move: " + cpu[random].valueI + " " + cpu[random].valueJ);
+            new flipplin().reversePlay(cpu[random].valueI, cpu[random].valueJ, this.checkOpponent(), this.checkPlayer());
+            drawTable();
+            ++counter;
+        }
     }
 }
