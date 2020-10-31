@@ -48,11 +48,11 @@ function drawTable() {
                 discs[i][j] = 3;
             }
 
-            let piece = document.createElement("div");
+            const piece = document.createElement("div");
 
-            piece.onclick = function () {
-                new actorPlay(color).updateState(i, j);
-            };
+            // piece.onclick = function () {
+            //     new actorPlay(color).updateState(i, j);
+            // };
             piece.setAttribute("id", "square" + i + j);
             piece.setAttribute("class", "square");
             curRow.appendChild(piece);
@@ -67,6 +67,9 @@ function drawTable() {
                 curSquare.appendChild(blackSquare);
                 blackSquare.className = "blacks";
             } else if (discs[i][j] === 3) {
+                  piece.onclick = function () {
+                  new actorPlay(color).updateState(i, j);
+              };
                 curSquare.className = "playable";
             }
         }
