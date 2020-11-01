@@ -5,6 +5,7 @@ let pointsBlack = 0;
 let player;
 let opponent;
 
+
 let discs = [
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -370,13 +371,23 @@ function hasMoves(playerToCheck, opponentToCheck) {
 function checkTurn(){
     if(!hasMoves(player, opponent) && hasMoves(opponent, player)) {
         alert("You have no moves, CPU's turn.");
-        new actorPlay().easy();
+        //new actorPlay().easy();
         if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
             alert("Game Over.");
             punctuation();
             restartGame();
             drawTable();
         }
+        else {
+          new actorPlay().easy();
+          if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
+              alert("Game Over.");
+              punctuation();
+              restartGame();
+              drawTable();
+          }
+        }
+
     } else if(hasMoves(player, opponent) && !hasMoves(opponent, player)) {
         alert("CPU has no moves, your turn.");
     }
@@ -424,9 +435,6 @@ function punctuation() {
     parent.appendChild(blackCounter);
     parent.appendChild(reset);
 
-    whiteCounter.innerText = pointsWhite.toString();
-    blackCounter.innerText = pointsBlack.toString();
-
     let nWhites = 0;
     let nBlacks = 0;
 
@@ -460,9 +468,21 @@ function increment(winner) {
         pointsBlack += 1;
     }
 
-    whiteCounter.textContent = pointsWhite;
-    blackCounter.textContent = pointsBlack;
+    whiteCounter.textContent = "White Wins: " + pointsWhite;
+    blackCounter.textContent = "Black Wins: " + pointsBlack;
 }
+
+// function score(player){
+//   let counter = 0;
+//   for(let i = 0; i < 8; i++){
+//     for(let j = 0; j < 8; j++){
+//       if(dics[i][j] == player){
+//         counter++;
+//       }
+//     }
+//   }
+//   return counter;
+// }
 
 
 class login {
@@ -477,10 +497,14 @@ class login {
         document.getElementById("uname").style.display = "none";
         document.getElementById("config").style.display = "none";
         document.getElementById("table").style.display = "none";
+        document.getElementById("quit").style.display = "none";
         // Makes login form Visible
         document.getElementById("login").style.display = "block";
         // Removes the table
         removeDivs('table');
+        removeDivs("points");
+        pointsWhite = 0;
+        pointsBlack = 0;
         // Resets board
         restartGame();
         color = null;
@@ -510,10 +534,15 @@ class config {
 
     start() {
         document.getElementById("config").style.display = "block";
+        document.getElementById("quit").style.display = "none";
+        document.getElementById("table").style.display = "none";
+
+
     }
 
     beginNewGame() {
         document.getElementById("config").style.display = "none";
+        document.getElementById("quit").style.display = "block";
 
         color = this.color;
         if (color === "whites") {
@@ -561,4 +590,19 @@ class actorPlay {
         new flipplin().reversePlay(cpu[random].valueI, cpu[random].valueJ, opponent, player);
         drawTable();
     }
+    //check if board is full
+    // isFull() {
+    //   let counter = 0;
+    //   for(let i = 0; i < 8; i++) {
+    //     for(let j = 0; j < 8; j++) {
+    //       if(discs[i][j] != 0 || discs[i][j] != 3){
+    //         counter++;
+    //       }
+    //     }
+    //   }
+    //   if(counter == 64){
+    //     return true;
+    //   }
+    // }
+
 }
