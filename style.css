@@ -60,6 +60,10 @@ h2 {
     font-size: small;
 }
 
+li {
+    list-style-type: circle;
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -104,9 +108,23 @@ h2 {
     flex: 1;
     box-sizing: border-box;
     display: flex;
+    flex-direction: column;
 }
 
 /* TABLE */
+#game-commands {
+    display: none;
+    align-items: center;
+    width: 33em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+}
+
+#color-played {
+    margin-right: auto;
+}
+
 #table {
     display: none;
     margin-left: auto;
@@ -227,4 +245,60 @@ h2 {
 
 #config button {
     float: bottom;
+}
+
+/* INSTRUCTIONS */
+.close {
+    display: none;
+}
+
+.open {
+    position: fixed;
+    display: block;
+    z-index: 2;
+    width: 50%; /* Full width (cover the whole page) */
+    height: auto; /* Full height (cover the whole page) */
+    align-self: center;
+    margin-left: 25%;
+    margin-right: 25%;
+    background-color: var(--fg3);
+    color: var(--bg1);
+    border-radius: 1em;
+    padding: 2em;
+    -webkit-box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+.open li {
+    margin-left: 1em;
+}
+.open h2 {
+    margin-top: 1em;
+}
+.open button {
+    margin-top: 1em;
+    float: right;
+    bottom: 0;
+}
+
+/* CLASSIFICATION BUTTON */
+#open-classification {
+    margin-right: 1em;
+}
+#white-classification {
+    margin-bottom: 1em;
+}
+#black-classification {
+    margin-bottom: 1em;
+}
+
+/* BUTTONS */
+button {
+    padding: 0.5em 2em 0.5em 2em;
+    background-color: var(--bg2);
+    border: solid 2px var(--bg3);
+    border-radius: 1em;
+    color: var(--fg1);
 }

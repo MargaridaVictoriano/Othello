@@ -9,11 +9,38 @@
 </head>
 <body>
     <div class="container">
+        <div id="instr" class="close">
+            <h1>Instructions</h1>
+            <h2>Basic Rules </h2>
+            Each Othello piece has a black side and a white side.
+            <p>On your turn, you place one piece on the board with your color facing up.</p>
+            <p>You must place the piece so that an opponent's piece, or a row of opponent's pieces, is flanked by your pieces.</p>
+            <p>All of the opponent's pieces between your pieces are then turned over to become your color.</p>
+            <h2>Movements</h2>
+            <p>A move consists of placing one piece on an empty square.</p>
+            <h2>How to Capture</h2>
+            <p>You can capture vertical, horizontal, and diagonal rows of pieces. Also, you can capture more than one row at once. </p>
+            <h2>End of the Game</h2>
+            <p>The game ends when:
+            <ul>
+                <li>One player wins, by making his color dominant on the board.</li>
+                <li>The players agree to finish the game (as a resignation, or a draw). </li>
+            </ul>
+            <button id="close-instr" type="button" onclick="new pop().close('instr')">Close</button>
+        </div>
+        <div id="classification" class="close">
+            <h1>Whites:</h1>
+            <p id="white-classification"></p>
+            <h1>Blacks:</h1>
+            <p id="black-classification"></p>
+            <button id="close-classification" type="button" onclick="new pop().close('classification')">Close</button>
+        </div>
+
         <div class="header">
             <h1 id="title">Othello</h1>
             <div class="id">
                 <h1 id="uname"></h1>
-                <button id="quit" type="button" onclick="new config().start()" >Quit</button>
+                <button id="quit" type="button" onclick="new config().start()">Withdraw</button>
                 <button id="sign-out" type="button" onclick="new login().start()">Sign out</button>
             </div>
         </div>
@@ -33,7 +60,7 @@
                     <p></p>
                     <select name="versus" id="versus">
                         <option value="computer">Computer</option>
-                        <option value="user">User</option>
+                        <!--<option value="user">User</option>-->
                     </select>
                     <p></p>
                     <label for="color">Choose a color:</label>
@@ -47,15 +74,18 @@
                     <p></p>
                     <select name="difficulty" id="difficulty">
                         <option value="easy">Easy</option>
-                        <option value="hard">Hard</option>
+                        <!--<option value="hard">Hard</option>-->
                     </select>
                     <p></p>
                     <button class="begin-game" type="button" onclick="new config().beginNewGame()">Start!</button>
                 </form>
             </div>
-            <div id="table">
+            <div id="game-commands">
+                <h2 id="color-played"></h2>
+                <button id="open-classification" type="button" onclick="new pop().open('classification')">Classification</button>
+                <button id="open-instr" type="button" onclick="new pop().open('instr')">Instructions</button>
             </div>
-            <div id="points">
+            <div id="table">
             </div>
         </div>
         <div class="footer">

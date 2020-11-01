@@ -365,11 +365,11 @@ function hasMoves(playerToCheck, opponentToCheck) {
             }
         }
     }
-    if(counter > 0) return true;
+    if (counter > 0) return true;
 }
 
-function checkTurn(){
-    if(!hasMoves(player, opponent) && hasMoves(opponent, player)) {
+function checkTurn() {
+    if (!hasMoves(player, opponent) && hasMoves(opponent, player)) {
         alert("You have no moves, CPU's turn.");
         //new actorPlay().easy();
         if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
@@ -377,21 +377,19 @@ function checkTurn(){
             punctuation();
             restartGame();
             drawTable();
-        }
-        else {
-          new actorPlay().easy();
-          if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
-              alert("Game Over.");
-              punctuation();
-              restartGame();
-              drawTable();
-          }
+        } else {
+            new actorPlay().easy();
+            if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
+                alert("Game Over.");
+                punctuation();
+                restartGame();
+                drawTable();
+            }
         }
 
-    } else if(hasMoves(player, opponent) && !hasMoves(opponent, player)) {
+    } else if (hasMoves(player, opponent) && !hasMoves(opponent, player)) {
         alert("CPU has no moves, your turn.");
-    }
-    else if(hasMoves(player, opponent) && hasMoves(opponent, player)) {
+    } else if (hasMoves(player, opponent) && hasMoves(opponent, player)) {
         new actorPlay().easy();
         if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
             alert("Game Over.");
@@ -399,8 +397,7 @@ function checkTurn(){
             restartGame();
             drawTable();
         }
-    }
-    else if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
+    } else if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
         alert("Game Over.");
         punctuation();
         restartGame();
@@ -423,21 +420,8 @@ function restartGame() {
 }
 
 function punctuation() {
-    removeDivs("points");
-    const parent = document.getElementById("points");
-    const whiteCounter = document.createElement("div");
-    const blackCounter = document.createElement("div");
-    whiteCounter.setAttribute("id", "white-counter");
-    blackCounter.setAttribute("id", "black-counter");
-    const reset = document.createElement("div");
-
-    parent.appendChild(whiteCounter);
-    parent.appendChild(blackCounter);
-    parent.appendChild(reset);
-
     let nWhites = 0;
     let nBlacks = 0;
-
 
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
@@ -448,42 +432,29 @@ function punctuation() {
             }
         }
     }
-
     if (nWhites >= nBlacks) {
         increment("white");
     }
-
     if (nBlacks >= nWhites) {
         increment("black");
     }
 }
 
 function increment(winner) {
-    const whiteCounter = document.getElementById("white-counter");
-    const blackCounter = document.getElementById("black-counter");
-
     if (winner === "white") {
         pointsWhite += 1;
     } else {
         pointsBlack += 1;
     }
-
-    whiteCounter.textContent = "White Wins: " + pointsWhite;
-    blackCounter.textContent = "Black Wins: " + pointsBlack;
+    winnerCount();
 }
 
-// function score(player){
-//   let counter = 0;
-//   for(let i = 0; i < 8; i++){
-//     for(let j = 0; j < 8; j++){
-//       if(dics[i][j] == player){
-//         counter++;
-//       }
-//     }
-//   }
-//   return counter;
-// }
-
+function winnerCount() {
+    const whiteCounter = document.getElementById("white-classification");
+    const blackCounter = document.getElementById("black-classification");
+    whiteCounter.textContent = pointsWhite;
+    blackCounter.textContent = pointsBlack;
+}
 
 class login {
     constructor(username, password) {
@@ -498,11 +469,11 @@ class login {
         document.getElementById("config").style.display = "none";
         document.getElementById("table").style.display = "none";
         document.getElementById("quit").style.display = "none";
+        document.getElementById("game-commands").style.display = "none";
         // Makes login form Visible
         document.getElementById("login").style.display = "block";
         // Removes the table
         removeDivs('table');
-        removeDivs("points");
         pointsWhite = 0;
         pointsBlack = 0;
         // Resets board
@@ -525,6 +496,7 @@ class login {
     }
 }
 
+// Configuration page
 class config {
     constructor() {
         this.versus = document.getElementById("versus").value;
@@ -536,13 +508,14 @@ class config {
         document.getElementById("config").style.display = "block";
         document.getElementById("quit").style.display = "none";
         document.getElementById("table").style.display = "none";
-
-
+        document.getElementById("game-commands").style.display = "none";
     }
 
     beginNewGame() {
+        // Hide Configuration, show game commands
         document.getElementById("config").style.display = "none";
         document.getElementById("quit").style.display = "block";
+        document.getElementById("game-commands").style.display = "flex";
 
         color = this.color;
         if (color === "whites") {
@@ -557,7 +530,12 @@ class config {
             new actorPlay().easy();
         }
 
+        // Initialize new game
+        winnerCount();
+        restartGame();
         drawTable();
+
+        document.getElementById("color-played").textContent = "Playing: " + this.color;
     }
 }
 
@@ -590,19 +568,16 @@ class actorPlay {
         new flipplin().reversePlay(cpu[random].valueI, cpu[random].valueJ, opponent, player);
         drawTable();
     }
-    //check if board is full
-    // isFull() {
-    //   let counter = 0;
-    //   for(let i = 0; i < 8; i++) {
-    //     for(let j = 0; j < 8; j++) {
-    //       if(discs[i][j] != 0 || discs[i][j] != 3){
-    //         counter++;
-    //       }
-    //     }
-    //   }
-    //   if(counter == 64){
-    //     return true;
-    //   }
-    // }
-
 }
+
+// overlays an element
+class pop {
+    close(element) {
+        document.getElementById(element).classList.replace("open", "close");
+    }
+
+    open(element) {
+        document.getElementById(element).classList.replace("close", "open");
+    }
+}
+
