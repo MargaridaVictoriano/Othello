@@ -155,7 +155,6 @@ li {
     float: left;
     display: flex;
     justify-content: center;
-
 }
 
 .whites {
@@ -256,8 +255,8 @@ li {
     position: fixed;
     display: block;
     z-index: 2;
-    width: 50%; /* Full width (cover the whole page) */
-    height: auto; /* Full height (cover the whole page) */
+    width: 50%;
+    height: auto;
     align-self: center;
     margin-left: 25%;
     margin-right: 25%;
@@ -269,6 +268,11 @@ li {
     -moz-box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
+}
+#classification {
+    width: 20% !important;
+    margin-left: 40% !important;
+    margin-right: 40% !important;
 }
 
 .open li {
@@ -301,4 +305,112 @@ button {
     border: solid 2px var(--bg3);
     border-radius: 1em;
     color: var(--fg1);
+}
+
+/* RESPONSIVE */
+@media only screen and (max-width: 1000px) {
+    #config,
+    #login {
+        width: 50% !important;
+    }
+    
+    #table {
+        display: none;
+        margin-left: auto;
+        margin-right: auto;
+        width: 25em;
+        height: 25em;
+        padding: 2em;
+        border-radius: 1em;
+        background-color: #423E37;
+        background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+        -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.25);
+        -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.25);
+        box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.25);
+    }
+    #table div {
+        width: 25em;
+        height: calc(3em + 2px);
+    }
+    #table div div {
+        width: 3em;
+        height: 3em;
+        margin: 1px;
+        background: var(--green);
+        border-radius: 0.8em;
+        float: left;
+        display: flex;
+        justify-content: center;
+    }
+
+    #classification {
+        width: 30% !important;
+        margin-left: 35% !important;
+        margin-right: 35% !important;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #config,
+    #login {
+        width: 50% !important;
+    }
+
+    #game-commands {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 17em;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1em;
+    }
+    #color-played {
+        margin-right: unset;
+    }
+    #open-classification {
+        margin-right: unset;
+        margin-bottom: 1em;
+        margin-top: 1em;
+    }
+
+    #table {
+        display: none;
+        margin-left: auto;
+        margin-right: auto;
+        width: 17em;
+        height: 17em;
+        padding: 2em;
+        border-radius: 1em;
+        background-color: #423E37;
+        background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+        -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.25);
+        -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.25);
+        box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.25);
+    }
+    #table div {
+        width: 17em;
+        height: calc(2em + 2px);
+    }
+    #table div div {
+        width: 2em;
+        height: 2em;
+        margin: 1px;
+        background: var(--green);
+        border-radius: 0.8em;
+        float: left;
+        display: flex;
+        justify-content: center;
+    }
+
+    #instr {
+        width: 80% !important;
+        margin-left: 10% !important;
+        margin-right: 10% !important;
+    }
+    #classification {
+        width: 50% !important;
+        margin-left: 25% !important;
+        margin-right: 25% !important;
+    }
 }
