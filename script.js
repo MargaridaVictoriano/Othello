@@ -371,6 +371,12 @@ function checkTurn(){
     if(!hasMoves(player, opponent) && hasMoves(opponent, player)) {
         alert("You have no moves, CPU's turn.");
         new actorPlay().easy();
+        if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
+            alert("Game Over.");
+            punctuation();
+            restartGame();
+            drawTable();
+        }
     } else if(hasMoves(player, opponent) && !hasMoves(opponent, player)) {
         alert("CPU has no moves, your turn.");
     }
@@ -380,12 +386,14 @@ function checkTurn(){
             alert("Game Over.");
             punctuation();
             restartGame();
+            drawTable();
         }
     }
     else if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
         alert("Game Over.");
         punctuation();
         restartGame();
+        drawTable();
     }
 }
 
