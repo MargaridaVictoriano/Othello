@@ -1,44 +1,8 @@
-window.onload = function() {
-  const punctuation = new Punctuation("points");
-}
-
-class Punctuation {
-  constructor(parentId) {
-    const parent = document.getElementById(parentId);
-    const whiteCounter = document.createElement("div");
-    const blackCounter = document.createElement("div");
-    const reset = document.createElement("div");
-
-    this.display = document.createElement("div");
-    this.pointsWhite = 0;
-    this.pointsBlack = 0;
-
-    parent.appendChild(whiteCounter);
-    parent.appendChild(blackCounter);
-    parent.appendChild(reset);
-
-    whiteCounter.innerText = this.pointsWhite;
-    blackCounter.innerText = this.pointsBlack;
-  }
-  incrementWhite() {
-    this.pointsWhite++;
-    this.display.innerText = this.pointsWhite;
-  }
-  incrementBlack() {
-    this.pointsBlack++;
-    this.display.innerText = this.pointsBlack;
-  }
-  reset() {
-    this.pointsWhite = 0;
-    this.pointsBlack = 0;
-    this.display.innerText = this.pointsWhite;
-    this.display.innerText = this.pointsBlack;
-  }
-}
-
 // Initial state
 let color;
 let counter = 1;
+let pointsWhite = 0;
+let pointsBlack = 0;
 
 let discs = [
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -297,7 +261,7 @@ class flipplin {
 function canPlay(i, j, player, opponent) {
     let mi, mj, c;
 
-    if(discs[i][j] === opponent || discs[i][j] === player) {
+    if (discs[i][j] === opponent || discs[i][j] === player) {
         return false;
     }
 
@@ -394,7 +358,7 @@ function hasMoves(discs, player, opponent) {
     let counter = 0;
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
-            if (canPlay(i, j, player, opponent) && (discs[i][j] === 3) ) {
+            if (canPlay(i, j, player, opponent) && (discs[i][j] === 3)) {
                 counter++;
             }
         }
@@ -403,6 +367,72 @@ function hasMoves(discs, player, opponent) {
         //alert(counter);
         return true;
     }
+}
+
+function punctuation() {
+    removeDivs("points");
+    const parent = document.getElementById("points");
+    const whiteCounter = document.createElement("div");
+    const blackCounter = document.createElement("div");
+    whiteCounter.setAttribute("id", "white-counter");
+    blackCounter.setAttribute("id", "black-counter");
+    const reset = document.createElement("div");
+
+    parent.appendChild(whiteCounter);
+    parent.appendChild(blackCounter);
+    parent.appendChild(reset);
+
+    whiteCounter.innerText = pointsWhite.toString();
+    blackCounter.innerText = pointsBlack.toString();
+
+    let nWhites = 0;
+    let nBlacks = 0;
+
+
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+            if (discs[i][j] === 1) {
+                nBlacks++;
+                console.log(nBlacks);
+            } else if (discs[i][j] === 2) {
+                nWhites++;
+                console.log(nWhites);
+            }
+        }
+    }
+
+    if(nWhites >= nBlacks) {
+        increment("white");
+    }
+
+    if(nBlacks >= nWhites) {
+        increment("black");
+    }
+}
+function increment(winner) {
+    const whiteCounter = document.getElementById("white-counter");
+    const blackCounter = document.getElementById("black-counter");
+
+    if(winner === "white") {
+        pointsWhite += 1;
+    }
+    else {
+        pointsBlack += 1;
+    }
+
+    whiteCounter.textContent = pointsWhite;
+    blackCounter.textContent = pointsBlack;
+}
+
+function zero() {
+    const whiteCounter = document.getElementById("white-counter");
+    const blackCounter = document.getElementById("black-counter");
+
+    pointsWhite = 0;
+    pointsBlack = 0;
+
+    whiteCounter.textContent = pointsWhite;
+    blackCounter.textContent = pointsBlack;
 }
 
 class login {
@@ -464,7 +494,6 @@ class config {
         document.getElementById("config").style.display = "none";
         color = this.color;
         drawTable();
-        new Punctuation("points");
     }
 }
 
@@ -506,7 +535,7 @@ class actorPlay {
     }
 
     updateState(posI, posJ) {
-        if((this.checkPlayer() === 1 && counter % 2 === 1) || (this.checkPlayer() === 2 && counter % 2 === 0)) {
+        if ((this.checkPlayer() === 1 && counter % 2 === 1) || (this.checkPlayer() === 2 && counter % 2 === 0)) {
             if (canPlay(posI, posJ, this.checkPlayer(), this.checkOpponent())) {
                 discs[posI][posJ] = this.checkPlayer();
                 drawTable();
@@ -515,7 +544,7 @@ class actorPlay {
             new flipplin().reversePlay(posI, posJ, this.checkPlayer(), this.checkOpponent());
             drawTable();
 
-            setTimeout(function(){
+            setTimeout(function () {
                 console.log("CPU thinking");
             }, 1000000);
 
@@ -524,40 +553,14 @@ class actorPlay {
 
             if (hasMoves(discs, this.checkPlayer(), this.checkOpponent()) && hasMoves(discs, this.checkOpponent(), this.checkPlayer())) {
                 alert("YAY DONE");
-                this.punctuation();
+                punctuation();
                 this.restartGame();
             }
         }
     }
 
-    punctuation() {
-        let nWhites = 0;
-        let nBlacks = 0;
-        let winsWhite = 0;
-        let winsBlack = 0;
-
-        for (let i = 0; i < 8; i++) {
-            for (let j = 0; j < 8; j++) {
-                if (discs[i][j] === 1) {
-                    nBlacks++;
-
-                } else if (discs[i][j] === 2) {
-                    nWhites++;
-                }
-            }
-        }
-
-        if(nWhites >= nBlacks) {
-            Punctuation.incrementWhite();
-        }
-
-        if(nBlacks >= nWhites) {
-            Punctuation.incrementBlack();
-        }
-    }
-
     easy() {
-        if((this.checkOpponent() === 1 && counter % 2 === 1) || (this.checkOpponent() === 2 && counter % 2 === 0)) {
+        if ((this.checkOpponent() === 1 && counter % 2 === 1) || (this.checkOpponent() === 2 && counter % 2 === 0)) {
             let cpu = [];
             for (let i = 0; i < 8; i++) {
                 for (let j = 0; j < 8; j++) {
