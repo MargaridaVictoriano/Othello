@@ -367,11 +367,22 @@ function hasMoves(playerToCheck, opponentToCheck) {
     if(counter > 0) return true;
 }
 
-function skipTurn(){
+function checkTurn(){
     if(!hasMoves(player, opponent) && hasMoves(opponent, player)) {
-        alert("You have no moves, CPU's turn.")
+        alert("You have no moves, CPU's turn.");
         new actorPlay().easy();
-    } else if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
+    } else if(hasMoves(player, opponent) && !hasMoves(opponent, player)) {
+        alert("CPU has no moves, your turn.");
+    }
+    else if(hasMoves(player, opponent) && hasMoves(opponent, player)) {
+        new actorPlay().easy();
+        if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
+            alert("Game Over.");
+            punctuation();
+            restartGame();
+        }
+    }
+    else if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
         alert("Game Over.");
         punctuation();
         restartGame();
@@ -524,14 +535,7 @@ class actorPlay {
         drawTable();
 
         // check if computer has moves and you don't
-        if (hasMoves(opponent, player) && !hasMoves(player, opponent)) {
-            alert("CPU has no moves, your turn.");
-            this.easy();
-            skipTurn();
-        } else {
-            this.easy();
-            skipTurn();
-        }
+        checkTurn();
     }
 
     easy() {
