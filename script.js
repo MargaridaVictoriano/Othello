@@ -1,8 +1,9 @@
 // Initial state
 let color;
-let counter = 1;
 let pointsWhite = 0;
 let pointsBlack = 0;
+let player;
+let opponent;
 
 let discs = [
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -70,7 +71,7 @@ function drawTable() {
                 blackSquare.className = "blacks";
             } else if (discs[i][j] === 3) {
                 piece.onclick = function () {
-                    new actorPlay(color).updateState(i, j);
+                    new actorPlay().updateState(i, j);
                 };
                 curSquare.className = "playable";
             }
@@ -82,7 +83,6 @@ function flip(toFlip, player) {
     for (let i = 0; i < toFlip.length; i++) {
         let point = toFlip.pop();
         discs[point.valueI][point.valueJ] = player;
-        console.log(point.valueI + " " + point.valueJ);
     }
     drawTable();
 }
@@ -105,8 +105,8 @@ class flipplin {
             while (discs[mi][mj] === opponent) {
                 toBeFlipped.push({valueI: mi, valueJ: mj});
                 mi++;
-                console.log(toBeFlipped.toString());
-                console.log(discs);
+                // console.log(toBeFlipped.toString());
+                // console.log(discs);
             }
         }
         //moving left YAY IT WORKS
@@ -263,110 +263,133 @@ function canPlay(i, j, player, opponent) {
 
     if (discs[i][j] === opponent || discs[i][j] === player) {
         return false;
-    }
+    } else {
+        // moving right
+        mi = i - 1;
+        mj = j;
+        c = 0;
+        while (mi > 0 && discs[mi][mj] === opponent) {
+            mi--;
+            c++;
+        }
+        if (mi >= 0 && discs[mi][mj] === player && c > 0) {
+            return true;
+        }
 
-    // moving right
-    mi = i - 1;
-    mj = j;
-    c = 0;
-    while (mi > 0 && discs[mi][mj] === opponent) {
-        mi--;
-        c++;
-    }
-    if (mi >= 0 && discs[mi][mj] === player && c > 0) {
-        return true;
-    }
+        // moving left
+        mi = i + 1;
+        mj = j;
+        c = 0;
+        while (mi < 7 && discs[mi][mj] === opponent) {
+            mi++;
+            c++;
+        }
+        if (mi <= 7 && discs[mi][mj] === player && c > 0) return true;
 
-    // moving left
-    mi = i + 1;
-    mj = j;
-    c = 0;
-    while (mi < 7 && discs[mi][mj] === opponent) {
-        mi++;
-        c++;
-    }
-    if (mi <= 7 && discs[mi][mj] === player && c > 0) return true;
+        // moving down
+        mi = i;
+        mj = j - 1;
+        c = 0;
+        while (mi > 0 && discs[mi][mj] === opponent) {
+            mj--;
+            c++;
+        }
+        if (mi >= 0 && discs[mi][mj] === player && c > 0) return true;
 
-    // moving down
-    mi = i;
-    mj = j - 1;
-    c = 0;
-    while (mi > 0 && discs[mi][mj] === opponent) {
-        mj--;
-        c++;
-    }
-    if (mi >= 0 && discs[mi][mj] === player && c > 0) return true;
+        //move up
+        mi = i;
+        mj = j + 1;
+        c = 0;
+        while (mj < 7 && discs[mi][mj] === opponent) {
+            mj++;
+            c++;
+        }
+        if (mj <= 7 && discs[mi][mj] === player && c > 0) return true;
 
-    //move up
-    mi = i;
-    mj = j + 1;
-    c = 0;
-    while (mj < 7 && discs[mi][mj] === opponent) {
-        mj++;
-        c++;
-    }
-    if (mj <= 7 && discs[mi][mj] === player && c > 0) return true;
+        //move up right
+        mi = i - 1;
+        mj = j - 1;
+        c = 0;
+        while (mi > 0 && mj > 0 && discs[mi][mj] === opponent) {
+            mi--;
+            mj--;
+            c++;
+        }
+        if (mi >= 0 && mj >= 0 && discs[mi][mj] === player && c > 0) return true;
 
-    //move up right
-    mi = i - 1;
-    mj = j - 1;
-    c = 0;
-    while (mi > 0 && mj > 0 && discs[mi][mj] === opponent) {
-        mi--;
-        mj--;
-        c++;
-    }
-    if (mi >= 0 && mj >= 0 && discs[mi][mj] === player && c > 0) return true;
+        //move up left
+        mi = i - 1;
+        mj = j + 1;
+        c = 0;
+        while (mi > 0 && mj < 7 && discs[mi][mj] === opponent) {
+            mi--;
+            mj++;
+            c++;
+        }
+        if (mi >= 0 && mj <= 7 && discs[mi][mj] === player && c > 0) return true;
 
-    //move up left
-    mi = i - 1;
-    mj = j + 1;
-    c = 0;
-    while (mi > 0 && mj < 7 && discs[mi][mj] === opponent) {
-        mi--;
-        mj++;
-        c++;
-    }
-    if (mi >= 0 && mj <= 7 && discs[mi][mj] === player && c > 0) return true;
+        //move down right
+        mi = i + 1;
+        mj = j - 1;
+        c = 0;
+        while (mi < 7 && mj > 0 && discs[mi][mj] === opponent) {
+            mi++;
+            mj--;
+            c++;
+        }
+        if (mi <= 7 && mj >= 0 && discs[mi][mj] === player && c > 0) return true;
 
-    //move down right
-    mi = i + 1;
-    mj = j - 1;
-    c = 0;
-    while (mi < 7 && mj > 0 && discs[mi][mj] === opponent) {
-        mi++;
-        mj--;
-        c++;
-    }
-    if (mi <= 7 && mj >= 0 && discs[mi][mj] === player && c > 0) return true;
+        //move down left
+        mi = i + 1;
+        mj = j + 1;
+        c = 0;
+        while (mi < 7 && mj < 7 && discs[mi][mj] === opponent) {
+            mi++;
+            mj++;
+            c++;
+        }
+        if (mi <= 7 && mj <= 7 && discs[mi][mj] === player && c > 0) return true;
 
-    //move down left
-    mi = i + 1;
-    mj = j + 1;
-    c = 0;
-    while (mi < 7 && mj < 7 && discs[mi][mj] === opponent) {
-        mi++;
-        mj++;
-        c++;
+        return false;
     }
-    if (mi <= 7 && mj <= 7 && discs[mi][mj] === player && c > 0) return true;
-
-    return false;
 }
 
-function hasMoves(discs, player, opponent) {
+function hasMoves(playerToCheck, opponentToCheck) {
     let counter = 0;
+
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
-            if (canPlay(i, j, player, opponent) && (discs[i][j] === 3)) {
+            if (canPlay(i, j, playerToCheck, opponentToCheck)) {
                 counter++;
             }
         }
     }
-    if (counter > 0) {
-        //alert(counter);
-        return true;
+    if(counter > 0) return true;
+}
+
+function skipTurn(){
+    if(!hasMoves(player, opponent) && hasMoves(opponent, player)) {
+        alert("You have no moves, CPU's turn.")
+        new actorPlay().easy();
+    } else if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
+        alert("Game Over.");
+        punctuation();
+        restartGame();
     }
+}
+
+function restartGame() {
+    // Resets board
+    discs = [
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 2, 1, 0, 0, 0],
+        [0, 0, 0, 1, 2, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0]
+    ];
 }
 
 function punctuation() {
@@ -393,30 +416,28 @@ function punctuation() {
         for (let j = 0; j < 8; j++) {
             if (discs[i][j] === 1) {
                 nBlacks++;
-                console.log(nBlacks);
             } else if (discs[i][j] === 2) {
                 nWhites++;
-                console.log(nWhites);
             }
         }
     }
 
-    if(nWhites >= nBlacks) {
+    if (nWhites >= nBlacks) {
         increment("white");
     }
 
-    if(nBlacks >= nWhites) {
+    if (nBlacks >= nWhites) {
         increment("black");
     }
 }
+
 function increment(winner) {
     const whiteCounter = document.getElementById("white-counter");
     const blackCounter = document.getElementById("black-counter");
 
-    if(winner === "white") {
+    if (winner === "white") {
         pointsWhite += 1;
-    }
-    else {
+    } else {
         pointsBlack += 1;
     }
 
@@ -424,16 +445,6 @@ function increment(winner) {
     blackCounter.textContent = pointsBlack;
 }
 
-function zero() {
-    const whiteCounter = document.getElementById("white-counter");
-    const blackCounter = document.getElementById("black-counter");
-
-    pointsWhite = 0;
-    pointsBlack = 0;
-
-    whiteCounter.textContent = pointsWhite;
-    blackCounter.textContent = pointsBlack;
-}
 
 class login {
     constructor(username, password) {
@@ -452,16 +463,8 @@ class login {
         // Removes the table
         removeDivs('table');
         // Resets board
-        discs = [
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 2, 1, 0, 0, 0],
-            [0, 0, 0, 1, 2, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0]
-        ];
+        restartGame();
+        color = null;
     }
 
     enter() {
@@ -492,89 +495,58 @@ class config {
 
     beginNewGame() {
         document.getElementById("config").style.display = "none";
+
         color = this.color;
+        if (color === "whites") {
+            player = 2;
+            opponent = 1;
+        } else if (color === "blacks") {
+            player = 1;
+            opponent = 2;
+        }
+
+        if (opponent === 1) {
+            new actorPlay().easy();
+        }
+
         drawTable();
     }
 }
 
 // Checks if you can play
 class actorPlay {
-    constructor(color) {
-        this.color = color;
-    }
-
-    restartGame() {
-        // Resets board
-        discs = [
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 2, 1, 0, 0, 0],
-            [0, 0, 0, 1, 2, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0]
-        ];
-        drawTable();
-    }
-
-    checkPlayer() {
-        if (this.color === "whites") {
-            return 2;
-        } else if (this.color === "blacks") {
-            return 1;
-        }
-    }
-
-    checkOpponent() {
-        if (this.color === "whites") {
-            return 1;
-        } else if (this.color === "blacks") {
-            return 2;
-        }
-    }
-
     updateState(posI, posJ) {
-        if ((this.checkPlayer() === 1 && counter % 2 === 1) || (this.checkPlayer() === 2 && counter % 2 === 0)) {
-            if (canPlay(posI, posJ, this.checkPlayer(), this.checkOpponent())) {
-                discs[posI][posJ] = this.checkPlayer();
-                drawTable();
-            }
-
-            new flipplin().reversePlay(posI, posJ, this.checkPlayer(), this.checkOpponent());
+        if (canPlay(posI, posJ, player, opponent)) {
+            discs[posI][posJ] = player;
             drawTable();
+        }
+        new flipplin().reversePlay(posI, posJ, player, opponent);
+        drawTable();
 
-            setTimeout(function () {
-                console.log("CPU thinking");
-            }, 1000000);
-
-            ++counter;
+        // check if computer has moves and you don't
+        if (hasMoves(opponent, player) && !hasMoves(player, opponent)) {
+            alert("CPU has no moves, your turn.");
             this.easy();
-
-            if (hasMoves(discs, this.checkPlayer(), this.checkOpponent()) && hasMoves(discs, this.checkOpponent(), this.checkPlayer())) {
-                alert("YAY DONE");
-                punctuation();
-                this.restartGame();
-            }
+            skipTurn();
+        } else {
+            this.easy();
+            skipTurn();
         }
     }
 
     easy() {
-        if ((this.checkOpponent() === 1 && counter % 2 === 1) || (this.checkOpponent() === 2 && counter % 2 === 0)) {
-            let cpu = [];
-            for (let i = 0; i < 8; i++) {
-                for (let j = 0; j < 8; j++) {
-                    if (canPlay(i, j, this.checkOpponent(), this.checkPlayer())) {
-                        cpu.push({valueI: i, valueJ: j});
-                    }
+        let cpu = [];
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                if (canPlay(i, j, opponent, player)) {
+                    cpu.push({valueI: i, valueJ: j});
                 }
             }
-            const random = Math.floor(Math.random() * cpu.length);
-            discs[cpu[random].valueI][cpu[random].valueJ] = this.checkOpponent();
-            console.log("CPU move: " + cpu[random].valueI + " " + cpu[random].valueJ);
-            new flipplin().reversePlay(cpu[random].valueI, cpu[random].valueJ, this.checkOpponent(), this.checkPlayer());
-            drawTable();
-            ++counter;
         }
+        const random = Math.floor(Math.random() * cpu.length);
+        discs[cpu[random].valueI][cpu[random].valueJ] = opponent;
+        console.log("CPU move: " + cpu[random].valueI + " " + cpu[random].valueJ);
+        new flipplin().reversePlay(cpu[random].valueI, cpu[random].valueJ, opponent, player);
+        drawTable();
     }
 }
