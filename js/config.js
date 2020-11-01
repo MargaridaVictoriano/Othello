@@ -28,13 +28,12 @@ class config {
             opponent = 2;
         }
 
-        if (opponent === 1) {
-            new actorPlay().easy();
-        }
-
         // Initialize new game
         winnerCount();
         restartGame();
+        if (opponent === 1) {
+            new actorPlay().easy();
+        }
         drawTable();
 
         document.getElementById("color-played").textContent = "Playing: " + this.color;

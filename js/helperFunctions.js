@@ -73,6 +73,9 @@ function checkTurn() {
 
     } else if (hasMoves(player, opponent) && !hasMoves(opponent, player)) {
         alert("CPU has no moves, your turn.");
+        if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
+            gameOver();
+        }
     } else if (hasMoves(player, opponent) && hasMoves(opponent, player)) {
         new actorPlay().easy();
         if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
