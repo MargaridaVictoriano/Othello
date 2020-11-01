@@ -39,6 +39,7 @@ function reversePlay(i, j, player, opponent)
         mi++;
         while (discs[mi][mj] === opponent) {
             toBeFlipped.push({valueI: mi, valueJ: mj});
+            flip(toBeFlipped, player);
             mi++;
         }
     }
@@ -55,6 +56,7 @@ function reversePlay(i, j, player, opponent)
         mi--;
         while (discs[mi][mj] === opponent) {
             toBeFlipped.push({valueI: mi, valueJ: mj});
+            flip(toBeFlipped, player);
             mi--;
         }
     }
@@ -71,6 +73,7 @@ function reversePlay(i, j, player, opponent)
         mj++;
         while (discs[mi][mj] === opponent) {
             toBeFlipped.push({valueI: mi, valueJ: mj});
+            flip(toBeFlipped, player);
             mj++;
         }
     }
@@ -87,6 +90,7 @@ function reversePlay(i, j, player, opponent)
         mj--;
         while (discs[mi][mj] === opponent) {
             toBeFlipped.push({valueI: mi, valueJ: mj});
+            flip(toBeFlipped, player);
             mj--;
         }
     }
@@ -105,6 +109,7 @@ function reversePlay(i, j, player, opponent)
         mi++;
         while (discs[mi][mj] === opponent) {
             toBeFlipped.push({valueI: mi, valueJ: mj});
+            flip(toBeFlipped, player);
             mj--;
             mi++;
         }
@@ -124,6 +129,7 @@ function reversePlay(i, j, player, opponent)
         mj--;
         while (discs[mi][mj] === opponent) {
             toBeFlipped.push({valueI: mi, valueJ: mj});
+            flip(toBeFlipped, player);
             mi--;
             mj--;
         }
@@ -143,6 +149,7 @@ function reversePlay(i, j, player, opponent)
         mj++;
         while (discs[mi][mj] === opponent) {
             toBeFlipped.push({valueI: mi, valueJ: mj});
+            flip(toBeFlipped, player);
             mi++;
             mj++;
         }
@@ -162,6 +169,7 @@ function reversePlay(i, j, player, opponent)
         mj++;
         while (discs[mi][mj] === opponent) {
             toBeFlipped.push({valueI: mi, valueJ: mj});
+            flip(toBeFlipped, player);
             mi--;
             mj++;
         }
