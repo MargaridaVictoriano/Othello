@@ -53,36 +53,44 @@ function drawTable() {
 // checks if anyone can move
 function checkTurn() {
     // alerts a game over
-    function gameOver() {
+    function gameReset() {
         alert("Game Over.");
         punctuation();
         restartGame();
         drawTable();
     }
 
-    if (!hasMoves(player, opponent) && hasMoves(opponent, player)) {
-        alert("You have no moves, CPU's turn.");
-        if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
-            gameOver();
-        } else {
-            new actorPlay().easy();
-            if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
-                gameOver();
-            }
-        }
+    function gameOver() {
+        if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) return true;
+    }
 
-    } else if (hasMoves(player, opponent) && !hasMoves(opponent, player)) {
+    function noComputer() {
+        if (hasMoves(player, opponent) && !hasMoves(opponent, player)) return true;
+    }
+
+    function noPlayer() {
+        if (!hasMoves(player, opponent) && hasMoves(opponent, player)) return true;
+    }
+
+    function allGood() {
+        if (hasMoves(player, opponent) && hasMoves(opponent, player)) return true;
+    }
+
+    if (gameOver()) {
+        gameReset();
+    } else if (noComputer()) {
         alert("CPU has no moves, your turn.");
-        if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
-            gameOver();
-        }
-    } else if (hasMoves(player, opponent) && hasMoves(opponent, player)) {
+    } else if (noPlayer()) {
+        alert("You have no moves, CPU's turn.");
         new actorPlay().easy();
-        if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
-            gameOver();
+        if (gameOver()) {
+            gameReset();
         }
-    } else if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) {
-        gameOver();
+    } else if (allGood()) {
+        new actorPlay().easy();
+        if (gameOver()) {
+            gameReset();
+        }
     }
 }
 
