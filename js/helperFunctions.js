@@ -103,6 +103,9 @@ function checkTurn() {
         punctuation();
         restartGame();
         drawTable();
+        if (player === 2) {
+            cpu();
+        }
     }
 
     function cpu() {
@@ -134,7 +137,6 @@ function checkTurn() {
     } else if (noComputer()) {
         message("CPU has no moves, your turn.");
     } else if (noPlayer()) {
-        /*setTimeout(() => {  message("You have no moves, CPU's turn."); }, 2000);*/
         message("You have no moves, CPU's turn.");
         if (gameOver()) {
             gameReset();
@@ -144,6 +146,9 @@ function checkTurn() {
             gameReset();
         }
     } else if (allGood()) {
+        if (gameOver()) {
+            gameReset();
+        }
         cpu();
         if (gameOver()) {
             gameReset();
