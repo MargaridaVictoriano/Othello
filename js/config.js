@@ -13,7 +13,7 @@ class config {
 
     // Show configuration page
     start() {
-        this.configurationDom.style.display = "block";
+        this.configurationDom.style.display = "flex";
         this.withdrawDom.style.display = "none";
         this.tableDom.style.display = "none";
         this.commandsDom.style.display = "none";

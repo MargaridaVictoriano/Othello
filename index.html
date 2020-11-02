@@ -36,9 +36,9 @@
         </div>
         <div id="classification" class="close">
             <h1>Whites:</h1>
-            <p id="white-classification"></p>
+            <p id="white-classification">0</p>
             <h1>Blacks:</h1>
-            <p id="black-classification"></p>
+            <p id="black-classification">0</p>
             <button id="close-classification" type="button" onclick="new pop().close('classification')">Close</button>
         </div>
 
@@ -53,38 +53,30 @@
         <div class="game-area">
             <div id="login" >
                 <form>
-                    <label for="username"></label><input type="text" placeholder="Username" id="username">
-                    <p></p>
-                    <label for="password"></label><input type="password" placeholder="Password" id="password">
-                    <p></p>
+                    <input type="text" placeholder="Username" id="username">
+                    <input type="password" placeholder="Password" id="password">
                     <button type="button" onclick="new login(username, password).enter()">Login</button>
                 </form>
             </div>
             <div id="config">
                 <form>
                     <label for="versus">Choose an opponent:</label>
-                    <p></p>
                     <select name="versus" id="versus">
                         <option value="computer">Computer</option>
                         <!--<option value="user">User</option>-->
                     </select>
-                    <p></p>
                     <label for="color">Choose a color:</label>
-                    <p></p>
                     <select name="color" id="color">
                         <option value="blacks">Black</option>
                         <option value="whites">White</option>
                     </select>
-                    <p></p>
                     <label for="difficulty">AI level:</label>
-                    <p></p>
                     <select name="difficulty" id="difficulty">
                         <option value="easy">Easy</option>
                         <!--<option value="hard">Hard</option>-->
                     </select>
-                    <p></p>
-                    <button class="begin-game" type="button" onclick="new config().beginNewGame()">Start!</button>
                 </form>
+                <button class="begin-game" type="button" onclick="new config().beginNewGame()">Start!</button>
             </div>
             <div id="game-commands">
                 <h2 id="color-played"></h2>
