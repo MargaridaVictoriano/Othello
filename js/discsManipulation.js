@@ -1,18 +1,4 @@
-// checks if someone can play
-function hasMoves(playerToCheck, opponentToCheck) {
-    let counter = 0;
-
-    for (let i = 0; i < 8; i++) {
-        for (let j = 0; j < 8; j++) {
-            if (canPlay(i, j, playerToCheck, opponentToCheck)) {
-                counter++;
-            }
-        }
-    }
-    if (counter > 0) return true;
-}
-
-// adds every disc to be flipped to an array, calls flip
+// adds every disc to be flipped, calls flip
 function reversePlay(i, j, player, opponent)
 {
     let toBeFlipped = [];

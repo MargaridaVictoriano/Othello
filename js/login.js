@@ -3,22 +3,32 @@ class login {
     constructor(username, password) {
         this.username = username;
         this.password = password;
+        this.configurationDom = document.getElementById("config");
+        this.withdrawDom = document.getElementById("quit");
+        this.tableDom = document.getElementById("table");
+        this.commandsDom = document.getElementById("game-commands");
+        this.loginDom = document.getElementById("login");
+        this.userDom = document.getElementById("uname");
+        this.signDom = document.getElementById("sign-out");
     }
 
     start() {
         // Makes account info invisible
-        document.getElementById("sign-out").style.display = "none";
-        document.getElementById("uname").style.display = "none";
-        document.getElementById("config").style.display = "none";
-        document.getElementById("table").style.display = "none";
-        document.getElementById("quit").style.display = "none";
-        document.getElementById("game-commands").style.display = "none";
+        this.signDom.style.display = "none";
+        this.userDom.style.display = "none";
+        this.configurationDom.style.display = "none";
+        this.tableDom.style.display = "none";
+        this.withdrawDom.style.display = "none";
+        this.commandsDom.style.display = "none";
+
         // Makes login form Visible
-        document.getElementById("login").style.display = "block";
+        this.loginDom.style.display = "block";
+
         // Removes the table
         removeDivs('table');
         pointsWhite = 0;
         pointsBlack = 0;
+
         // Resets board
         restartGame();
         color = null;
@@ -29,11 +39,12 @@ class login {
         this.username = document.getElementById("username").value
         this.password = document.getElementById("password").value
 
+        // Allow login
         if (this.username === "" && this.password === "") {
-            document.getElementById("uname").innerHTML = this.username;
-            document.getElementById("uname").style.display = "block";
-            document.getElementById("sign-out").style.display = "block";
-            document.getElementById("login").style.display = "none";
+            this.userDom.innerHTML = this.username;
+            this.userDom.style.display = "block";
+            this.signDom.style.display = "block";
+            this.loginDom.style.display = "none";
             new config().start();
         }
     }

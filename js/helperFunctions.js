@@ -1,3 +1,17 @@
+// resets board
+function restartGame() {
+    discs = [
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 2, 1, 0, 0, 0],
+        [0, 0, 0, 1, 2, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0]
+    ];
+}
+
 // Removes all children of a div
 function removeDivs(elementId) {
     const element = document.getElementById(elementId);
@@ -50,12 +64,27 @@ function drawTable() {
     }
 }
 
+// checks if someone can play
+function hasMoves(playerToCheck, opponentToCheck) {
+    let counter = 0;
+
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+            if (canPlay(i, j, playerToCheck, opponentToCheck)) {
+                counter++;
+            }
+        }
+    }
+    if (counter > 0) return true;
+}
+
 // checks if anyone can move
 function checkTurn() {
     // alerts a game over
     function gameReset() {
         alert("Game Over.");
         punctuation();
+        new pop().open('classification');
         restartGame();
         drawTable();
     }
@@ -93,21 +122,6 @@ function checkTurn() {
         }
     }
 }
-
-// resets board
-function restartGame() {
-    discs = [
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 2, 1, 0, 0, 0],
-        [0, 0, 0, 1, 2, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0]
-    ];
-}
-
 
 // overlays an element
 class pop {

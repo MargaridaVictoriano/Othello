@@ -5,7 +5,7 @@ class actorPlay {
             discs[posI][posJ] = player;
             drawTable();
         }
-        new reversePlay(posI, posJ, player, opponent);
+        reversePlay(posI, posJ, player, opponent);
         drawTable();
 
         // check if computer has moves and you don't
@@ -24,7 +24,7 @@ class actorPlay {
         const random = Math.floor(Math.random() * cpu.length);
         discs[cpu[random].valueI][cpu[random].valueJ] = opponent;
         console.log("CPU move: " + cpu[random].valueI + " " + cpu[random].valueJ);
-        new reversePlay(cpu[random].valueI, cpu[random].valueJ, opponent, player);
+        reversePlay(cpu[random].valueI, cpu[random].valueJ, opponent, player);
         drawTable();
     }
 }

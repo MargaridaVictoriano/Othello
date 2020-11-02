@@ -4,21 +4,28 @@ class config {
         this.versus = document.getElementById("versus").value;
         this.color = document.getElementById("color").value;
         this.difficulty = document.getElementById("difficulty").value;
+        this.configurationDom = document.getElementById("config");
+        this.withdrawDom = document.getElementById("quit");
+        this.tableDom = document.getElementById("table");
+        this.commandsDom = document.getElementById("game-commands");
+        this.colorPlayedDom = document.getElementById("color-played");
     }
 
+    // Show configuration page
     start() {
-        document.getElementById("config").style.display = "block";
-        document.getElementById("quit").style.display = "none";
-        document.getElementById("table").style.display = "none";
-        document.getElementById("game-commands").style.display = "none";
+        this.configurationDom.style.display = "block";
+        this.withdrawDom.style.display = "none";
+        this.tableDom.style.display = "none";
+        this.commandsDom.style.display = "none";
     }
 
     beginNewGame() {
         // Hide Configuration, show game commands
-        document.getElementById("config").style.display = "none";
-        document.getElementById("quit").style.display = "block";
-        document.getElementById("game-commands").style.display = "flex";
+        this.configurationDom.style.display = "none";
+        this.withdrawDom.style.display = "block";
+        this.commandsDom.style.display = "flex";
 
+        // Attribute colors to players
         color = this.color;
         if (color === "whites") {
             player = 2;
@@ -36,6 +43,7 @@ class config {
         }
         drawTable();
 
-        document.getElementById("color-played").textContent = "Playing: " + this.color;
+        // Show player color selection
+        this.colorPlayedDom.textContent = "Playing as: " + this.color;
     }
 }
