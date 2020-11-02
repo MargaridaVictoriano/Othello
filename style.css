@@ -314,6 +314,14 @@ button {
     color: var(--fg1);
 }
 
+/* MESSAGES */
+#message {
+    text-align: center;
+    width: 20% !important;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
 /* RESPONSIVE */
 @media only screen and (max-width: 1000px) {
     #config,
@@ -354,6 +362,13 @@ button {
         width: 30% !important;
         margin-left: 35% !important;
         margin-right: 35% !important;
+    }
+
+    #message {
+        text-align: center;
+        width: 40% !important;
+        margin-left: 30%;
+        margin-right: 30%;
     }
 }
 
@@ -419,5 +434,12 @@ button {
         width: 50% !important;
         margin-left: 25% !important;
         margin-right: 25% !important;
+    }
+
+    #message {
+        text-align: center;
+        width: 60% !important;
+        margin-left: 20%;
+        margin-right: 20%;
     }
 }

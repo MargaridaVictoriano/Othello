@@ -80,11 +80,27 @@ function hasMoves(playerToCheck, opponentToCheck) {
 
 // checks if anyone can move
 function checkTurn() {
+    let messageDom = document.getElementById("message");
+
+    // pops a new message
+    function message(string) {
+        removeDivs("message");
+        let warning = document.createElement("h1");
+        messageDom.appendChild(warning);
+        warning.setAttribute("id", "warning");
+        let curWarning = document.getElementById("warning");
+        let button = document.createElement("button");
+        messageDom.appendChild(button);
+        button.setAttribute("onclick", "new pop().close('message')");
+        button.textContent = "Close";
+        curWarning.textContent = string;
+        new pop().open('message');
+    }
+
     // alerts a game over
     function gameReset() {
-        alert("Game Over.");
+        message("Game Over.");
         punctuation();
-        new pop().open('classification');
         restartGame();
         drawTable();
     }
@@ -108,9 +124,9 @@ function checkTurn() {
     if (gameOver()) {
         gameReset();
     } else if (noComputer()) {
-        alert("CPU has no moves, your turn.");
+        message("CPU has no moves, your turn.");
     } else if (noPlayer()) {
-        alert("You have no moves, CPU's turn.");
+        message("You have no moves, CPU's turn.");
         new actorPlay().easy();
         if (gameOver()) {
             gameReset();
