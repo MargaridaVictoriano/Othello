@@ -105,6 +105,14 @@ function checkTurn() {
         drawTable();
     }
 
+    function cpu() {
+        if (diff === "easy") {
+            new actorPlay().easy();
+        } else if (diff === "medium") {
+            new actorPlay().medium();
+        }
+    }
+
     function gameOver() {
         if (!hasMoves(player, opponent) && !hasMoves(opponent, player)) return true;
     }
@@ -126,13 +134,17 @@ function checkTurn() {
     } else if (noComputer()) {
         message("CPU has no moves, your turn.");
     } else if (noPlayer()) {
+        /*setTimeout(() => {  message("You have no moves, CPU's turn."); }, 2000);*/
         message("You have no moves, CPU's turn.");
-        new actorPlay().easy();
+        if (gameOver()) {
+            gameReset();
+        }
+        cpu();
         if (gameOver()) {
             gameReset();
         }
     } else if (allGood()) {
-        new actorPlay().easy();
+        cpu();
         if (gameOver()) {
             gameReset();
         }

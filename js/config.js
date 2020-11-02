@@ -35,11 +35,17 @@ class config {
             opponent = 2;
         }
 
+        diff = this.difficulty;
+
         // Initialize new game
         winnerCount();
         restartGame();
         if (opponent === 1) {
-            new actorPlay().easy();
+            if (diff === "easy") {
+                new actorPlay().easy();
+            } else if (diff === "medium") {
+                new actorPlay().medium();
+            }
         }
         drawTable();
 

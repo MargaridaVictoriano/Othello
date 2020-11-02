@@ -1,5 +1,6 @@
 // Initial state
 let color;
+let diff;
 let pointsWhite = 0;
 let pointsBlack = 0;
 let player;
