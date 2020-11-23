@@ -12,6 +12,7 @@
     <script src="js/login.js"></script>
     <script src="js/playAction.js"></script>
     <script src="js/winCounting.js"></script>
+    <script src="js/request.js"></script>
 </head>
 <body>
     <div class="container">
@@ -46,10 +47,22 @@
             <button id="close-classification" type="button" onclick="new pop().close('classification')">Close</button>
         </div>
 
+        <div id="ranking" class="close">
+            <table>
+                <tr>
+                    <th>Nick</th>
+                </tr>
+                <tr>
+                    <th>Wins</th>
+                </tr>
+            </table>
+        </div>
+
         <div class="header">
             <h1 id="title">Othello</h1>
             <div class="id">
                 <h1 id="uname"></h1>
+                <button id="ranking-button" type="button" onclick="ranking()">Ranking</button>
                 <button id="quit" type="button" onclick="new config().start()">Withdraw</button>
                 <button id="sign-out" type="button" onclick="new login().start()">Sign out</button>
             </div>
@@ -59,7 +72,7 @@
                 <form>
                     <input type="text" placeholder="Username" id="username">
                     <input type="password" placeholder="Password" id="password">
-                    <button type="button" onclick="new login(username, password).enter()">Login</button>
+                    <button type="button" onclick="new login(username, password).register()">Register</button>
                 </form>
             </div>
             <div id="config">

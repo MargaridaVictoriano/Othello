@@ -92,13 +92,10 @@ li {
     align-items: center;
 }
 
-#sign-out {
+#sign-out,
+#quit {
     display: none;
     margin-left: 1em;
-}
-
-#quit {
-  display: none;
 }
 
 /* GAME AREA */

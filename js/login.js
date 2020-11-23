@@ -34,6 +34,22 @@ class login {
         color = null;
     }
 
+    register() {
+        let nick = document.getElementById("username").value;
+        let pass = document.getElementById("password").value;
+         fetch("http://twserver.alunos.dcc.fc.up.pt:8008/register", {
+             method: 'POST',
+             body: 	JSON.stringify({"nick": nick, "pass": pass} )
+         })
+             .then(response => response.json())
+             .then(process)
+             .catch(console.log);
+
+        function process(response) {
+            console.log(response);
+        }
+    }
+
     enter() {
         // Get info from form
         this.username = document.getElementById("username").value
