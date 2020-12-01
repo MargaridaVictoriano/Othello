@@ -36,9 +36,9 @@ class login {
   }
 
   register() {
-    let nick = document.getElementById("username").value;
-    let pass = document.getElementById("password").value;
-    let group = "1";
+    nick = document.getElementById("username").value;
+    pass = document.getElementById("password").value;
+    group = "1";
     fetch("http://twserver.alunos.dcc.fc.up.pt:8008/register", {
       method: 'POST',
       body: 	JSON.stringify({"nick": nick, "pass": pass} )
@@ -47,49 +47,78 @@ class login {
       return response.text();
     })
     .then(function(response) {
-      if(response != "{}") {
+      if(response !== "{}") {
         window.alert("User registered with a different password.")
       }
       else {
-        console.log("yo");
         console.log(nick + " " + pass);
-        join(group,nick,pass);
+        document.getElementById("uname").innerHTML = nick;
+        document.getElementById("uname").style.display = "block";
+        document.getElementById("sign-out").style.display = "block";
+        document.getElementById("login").style.display = "none";
+        new config().start();
       }
     })
     .catch(function(error){
-      return;
     });
-
   }
 }
 
-function join(group,username,password) {
-  console.log("hey");
+function join(group, nick, pass) {
   fetch("http://twserver.alunos.dcc.fc.up.pt:8008/join", {
     method: 'POST',
-    body: 	JSON.stringify({"group" : group, "nick": username, "pass": password} )
+    body: 	JSON.stringify({"group" : group, "nick": nick, "pass": pass} )
   })
   .then(function(response){
     return response.text();
   })
   .then(function(response) {
-    if(response = "{}"){
+    if(response === "{}"){
       alert("Waiting for another player.");
-      this.join(group,username,password);
+    }
+    else if (response.includes("error")) {
+      alert("Error.");
     }
     else {
-      color = response.color;
-      this.update(response.game,this.username);
+      let data = JSON.parse(response);
+      color = data.color;
+      gameID = data.game;
+      update(gameID, nick);
     }
   })
   .catch(function(error){
-    return;
   });
+}
 
-  this.userDom.innerHTML = this.username;
-  this.userDom.style.display = "block";
-  this.signDom.style.display = "block";
-  this.loginDom.style.display = "none";
-  new config().start();
+function update() {
+  const eventSource = new EventSource('http://twserver.alunos.dcc.fc.up.pt:8008/update' + encodeURI('?nick=' + nick + '&game=' + gameID));
+  eventSource.onmessage = function (event) {
+    const data = JSON.parse(event.data);
+    currentBoard = data.board;
+    drawTable2();
+    turn = data.turn;
+    console.log(data);
+  }
+}
 
+function leave() {
+  eventSource.close();
+}
+
+function notify(row, column) {
+  fetch("http://twserver.alunos.dcc.fc.up.pt:8008/notify", {
+    method: 'POST',
+    body: 	JSON.stringify({"nick": nick, "pass": pass, "game": gameID, "move": {"row": row, "column": column}} )
+  })
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(response) {
+        let responseJSON = JSON.parse(response);
+        if (responseJSON.error === "Not your turn to play") {
+          alert("Not your turn to play");
+        }
+      })
+      .catch(function(error){
+      });
 }

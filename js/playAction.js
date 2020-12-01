@@ -5,15 +5,25 @@ class actorPlay {
     }
 
     updateState(posI, posJ) {
-        if (canPlay(posI, posJ, player, opponent)) {
-            discs[posI][posJ] = player;
-            drawTable();
+        if (vs === "user") {
+            if (canPlay2(posI, posJ, player, opponent)) {
+                currentBoard[posI][posJ] = player;
+                drawTable2();
+            }
+            reversePlay2(posI, posJ, player, opponent);
+            drawTable2();
+            notify(posI, posJ);
         }
-        reversePlay(posI, posJ, player, opponent);
-        drawTable();
-
-        // check if computer has moves and you don't
-        checkTurn();
+        else if (vs === "computer") {
+            if (canPlay(posI, posJ, player, opponent)) {
+                discs[posI][posJ] = player;
+                drawTable();
+            }
+            reversePlay(posI, posJ, player, opponent);
+            drawTable();
+            // check if computer has moves and you don't
+            checkTurn();
+        }
     }
 
     easy() {

@@ -25,31 +25,44 @@ class config {
         this.withdrawDom.style.display = "block";
         this.commandsDom.style.display = "flex";
 
-        // Attribute colors to players
-        color = this.color;
-        if (color === "whites") {
-            player = 2;
-            opponent = 1;
-        } else if (color === "blacks") {
-            player = 1;
-            opponent = 2;
-        }
-
-        diff = this.difficulty;
-
         // Initialize new game
         winnerCount();
         restartGame();
-        if (opponent === 1) {
-            if (diff === "easy") {
-                new actorPlay().easy();
-            } else if (diff === "medium") {
-                new actorPlay().medium();
+        vs = this.versus;
+        // Attribute colors to players
+        if (vs === "computer") {
+            color = this.color;
+            diff = this.difficulty;
+            if (color === "light") {
+                player = 2;
+                opponent = 1;
+            } else if (color === "dark") {
+                player = 1;
+                opponent = 2;
             }
+            if (opponent === 1) {
+                if (this.difficulty === "easy") {
+                    new actorPlay().easy();
+                } else if (this.difficulty === "medium") {
+                    new actorPlay().medium();
+                }
+            }
+            drawTable();
         }
-        drawTable();
+
+        if (vs === "user") {
+            join(group, nick, pass);
+            if (color === "light") {
+                player = "light";
+                opponent = "dark";
+            } else if (color === "dark") {
+                player = "dark";
+                opponent = "light";
+            }
+            drawTable2();
+        }
 
         // Show player color selection
-        this.colorPlayedDom.textContent = "Playing as: " + this.color;
+        this.colorPlayedDom.textContent = "Playing as: " + color;
     }
 }

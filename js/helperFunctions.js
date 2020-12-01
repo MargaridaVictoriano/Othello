@@ -64,6 +64,50 @@ function drawTable() {
     }
 }
 
+// Draws table
+function drawTable2() {
+    removeDivs("table");
+    const table = document.getElementById("table");
+    table.style.display = "flex";
+
+    for (let i = 0; i < 8; i++) {
+        let row = document.createElement("div");
+        table.appendChild(row);
+        row.setAttribute("id", "row" + i);
+        let curRow = document.getElementById("row" + i);
+
+        for (let j = 0; j < 8; j++) {
+            if (canPlay2(i, j, player, opponent) && currentBoard[i][j] === "empty") {
+                currentBoard[i][j] = "playable";
+            }
+            if (!(canPlay2(i, j, player, opponent)) && currentBoard[i][j] === 3 && currentBoard[i][j] !== "dark" && currentBoard[i][j] !== "light") {
+                currentBoard[i][j] = "empty";
+            }
+            const piece = document.createElement("div");
+
+            piece.setAttribute("id", "square" + i + j);
+            piece.setAttribute("class", "square");
+            curRow.appendChild(piece);
+
+            const curSquare = document.getElementById("square" + i + j);
+            if (currentBoard[i][j] === "light") {
+                let whiteSquare = document.createElement("div");
+                curSquare.appendChild(whiteSquare);
+                whiteSquare.className = "whites";
+            } else if (currentBoard[i][j] === "dark") {
+                let blackSquare = document.createElement("div");
+                curSquare.appendChild(blackSquare);
+                blackSquare.className = "blacks";
+            } else if (currentBoard[i][j] === "playable") {
+                piece.onclick = function () {
+                    new actorPlay().updateState(i, j);
+                };
+                curSquare.className = "playable";
+            }
+        }
+    }
+}
+
 // checks if someone can play
 function hasMoves(playerToCheck, opponentToCheck) {
     let counter = 0;
