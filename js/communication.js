@@ -21,6 +21,7 @@ function register() {
             }
         })
         .catch(function (error) {
+            return;
         });
 
     join();
@@ -58,6 +59,7 @@ function join() {
             new config().start();
         })
         .catch(function (error) {
+            return;
         });
 }
 
@@ -67,6 +69,7 @@ function update() {
         let obj = JSON.parse(event.data);
         currentBoard = obj.board;
         turn = obj.turn;
+
         // check winner then event close
         if (obj.winner !== undefined) {
             if (nick === obj.winner) {
@@ -77,6 +80,13 @@ function update() {
             }
             eventSource.close();
             new login().start()
+            return;
+        }
+
+        // skips play
+        if (obj.skip !== undefined) {
+            message("You have no moves, opponent's turn.");
+            notify(null);
         }
 
         drawTable2();
@@ -103,6 +113,7 @@ function notify(row, column) {
         return response.json();
     })
     .catch(function(error) {
+        return;
     });
 }
 
@@ -121,6 +132,7 @@ function leave() {
             return response.json();
         })
         .catch(function(error) {
+            return;
         });
 
     new login().start()
@@ -136,5 +148,6 @@ function ranking() {
         return response.json();
     })
     .catch(function(error) {
+        return;
     });
 }

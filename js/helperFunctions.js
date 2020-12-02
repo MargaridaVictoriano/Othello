@@ -127,24 +127,24 @@ function hasMoves(playerToCheck, opponentToCheck) {
     if (counter > 0) return true;
 }
 
+// pops a new message
+function message(string) {
+    removeDivs("message");
+    let warning = document.createElement("h1");
+    messageDom.appendChild(warning);
+    warning.setAttribute("id", "warning");
+    let curWarning = document.getElementById("warning");
+    let button = document.createElement("button");
+    messageDom.appendChild(button);
+    button.setAttribute("onclick", "new pop().close('message')");
+    button.textContent = "Close";
+    curWarning.textContent = string;
+    new pop().open('message');
+}
+
 // checks if anyone can move
 function checkTurn() {
     let messageDom = document.getElementById("message");
-
-    // pops a new message
-    function message(string) {
-        removeDivs("message");
-        let warning = document.createElement("h1");
-        messageDom.appendChild(warning);
-        warning.setAttribute("id", "warning");
-        let curWarning = document.getElementById("warning");
-        let button = document.createElement("button");
-        messageDom.appendChild(button);
-        button.setAttribute("onclick", "new pop().close('message')");
-        button.textContent = "Close";
-        curWarning.textContent = string;
-        new pop().open('message');
-    }
 
     // alerts a game over
     function gameReset() {
