@@ -12,6 +12,18 @@ class login {
   }
 
   start() {
+    // resets board
+    currentBoard = [
+      ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+      ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+      ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+      ["empty", "empty", "empty", "light", "dark", "empty", "empty", "empty"],
+      ["empty", "empty", "empty", "dark", "light", "empty", "empty", "empty"],
+      ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+      ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+      ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"]
+    ];
+
     // Makes account info invisible
     this.signDom.style.display = "none";
     this.userDom.style.display = "none";

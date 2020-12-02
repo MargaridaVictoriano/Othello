@@ -78,8 +78,11 @@ function update() {
             else {
                 increment(opponent);
             }
+            message("Winner is: " + obj.winner);
+
             eventSource.close();
-            new login().start()
+            new online().start();
+            register();
             return;
         }
 

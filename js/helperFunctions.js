@@ -129,6 +129,7 @@ function hasMoves(playerToCheck, opponentToCheck) {
 
 // pops a new message
 function message(string) {
+    let messageDom = document.getElementById("message");
     removeDivs("message");
     let warning = document.createElement("h1");
     messageDom.appendChild(warning);
@@ -144,8 +145,6 @@ function message(string) {
 
 // checks if anyone can move
 function checkTurn() {
-    let messageDom = document.getElementById("message");
-
     // alerts a game over
     function gameReset() {
         message("Game Over.");
