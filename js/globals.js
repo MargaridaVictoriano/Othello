@@ -10,6 +10,7 @@ let pass;
 let group;
 let gameID;
 let isOnline = false;
+let turn;
 let url = "http://twserver.alunos.dcc.fc.up.pt:8008/";
 
 let discs = [

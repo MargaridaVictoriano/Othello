@@ -66,6 +66,11 @@ function drawTable() {
 
 // Draws table
 function drawTable2() {
+    // When server timeouts it does nothing
+    if (currentBoard === null) {
+        return;
+    }
+
     removeDivs("table");
     const table = document.getElementById("table");
     table.style.display = "flex";

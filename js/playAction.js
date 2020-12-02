@@ -6,23 +6,26 @@ class actorPlay {
 
     updateState(posI, posJ) {
         if (isOnline) {
-            if (canPlay2(posI, posJ, player, opponent)) {
+            if (turn === nick) {
                 currentBoard[posI][posJ] = player;
                 drawTable2();
+                reversePlay2(posI, posJ, player, opponent);
+                drawTable2();
+                notify(posI, posJ);
+            } else {
+                alert("NOT YOUR TURN!");
             }
-            reversePlay2(posI, posJ, player, opponent);
-            drawTable2();
-            notify(posI, posJ);
         }
-        else {
+        else if (!isOnline) {
             if (canPlay(posI, posJ, player, opponent)) {
                 discs[posI][posJ] = player;
                 drawTable();
+                reversePlay(posI, posJ, player, opponent);
+                drawTable();
+                // check if computer has moves and you don't
+                checkTurn();
             }
-            reversePlay(posI, posJ, player, opponent);
-            drawTable();
-            // check if computer has moves and you don't
-            checkTurn();
+
         }
     }
 

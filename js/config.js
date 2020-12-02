@@ -32,7 +32,7 @@ class config {
         if (this.versus === "computer") {
             this.singleDom.style.display = "flex";
             this.configurationDom.style.display = "none";
-        } else {
+        } else if (this.versus === "user") {
             new online().start();
         }
     }

@@ -1,7 +1,7 @@
 function register() {
     nick = document.getElementById("username").value;
     pass = document.getElementById("password").value;
-    group = 1;
+    group = "1";
 
     let registerInfo = {
         nick: nick,
@@ -66,6 +66,19 @@ function update() {
     eventSource.onmessage = function (event) {
         let obj = JSON.parse(event.data);
         currentBoard = obj.board;
+        turn = obj.turn;
+        // check winner then event close
+        if (obj.winner !== undefined) {
+            if (nick === obj.winner) {
+                increment(player);
+            }
+            else {
+                increment(opponent);
+            }
+            eventSource.close();
+            new login().start()
+        }
+
         drawTable2();
     }
 }
@@ -94,8 +107,24 @@ function notify(row, column) {
 }
 
 function leave() {
-    EventSource.CLOSED;
+    let gameInfo = {
+        nick: nick,
+        pass: pass,
+        game: gameID
+    }
+
+    fetch(url + "leave", {
+        method: 'POST',
+        body: JSON.stringify(gameInfo)
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .catch(function(error) {
+        });
+
     new login().start()
+    isOnline = false;
 }
 
 function ranking() {
