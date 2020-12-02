@@ -5,7 +5,7 @@ class actorPlay {
     }
 
     updateState(posI, posJ) {
-        if (vs === "user") {
+        if (isOnline) {
             if (canPlay2(posI, posJ, player, opponent)) {
                 currentBoard[posI][posJ] = player;
                 drawTable2();
@@ -14,7 +14,7 @@ class actorPlay {
             drawTable2();
             notify(posI, posJ);
         }
-        else if (vs === "computer") {
+        else {
             if (canPlay(posI, posJ, player, opponent)) {
                 discs[posI][posJ] = player;
                 drawTable();

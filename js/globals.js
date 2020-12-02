@@ -5,12 +5,12 @@ let pointsWhite = 0;
 let pointsBlack = 0;
 let player;
 let opponent;
-let turn;
 let nick;
 let pass;
 let group;
 let gameID;
-let vs;
+let isOnline = false;
+let url = "http://twserver.alunos.dcc.fc.up.pt:8008/";
 
 let discs = [
     [0, 0, 0, 0, 0, 0, 0, 0],

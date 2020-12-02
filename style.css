@@ -93,7 +93,8 @@ li {
 }
 
 #sign-out,
-#quit {
+#quit,
+#ranking-button {
     display: none;
     margin-left: 1em;
 }
@@ -226,7 +227,8 @@ li {
 }
 
 /* CONFIGURATION */
-#config {
+#config,
+#singleplayer{
     display: none;
     flex-direction: column;
     align-items: center;
@@ -237,16 +239,19 @@ li {
     text-align: center;
 }
 
-#config select {
+#config select,
+#singleplayer select {
     margin-bottom: 1em;
 }
 
-#config label {
+#config label ,
+#singleplayer label {
     display: inline-block;
     width: 100%;
 }
 
-#config button {
+#config button,
+#singleplayer button {
     float: end;
 }
 

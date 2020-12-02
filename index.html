@@ -12,7 +12,7 @@
     <script src="js/login.js"></script>
     <script src="js/playAction.js"></script>
     <script src="js/winCounting.js"></script>
-    <script src="js/request.js"></script>
+    <script src="js/communication.js"></script>
 </head>
 <body>
     <div class="container">
@@ -63,8 +63,8 @@
             <div class="id">
                 <h1 id="uname"></h1>
                 <button id="ranking-button" type="button" onclick="ranking()">Ranking</button>
-                <button id="quit" type="button" onclick="new config().start()">Withdraw</button>
-                <button id="sign-out" type="button" onclick="new login().start()">Sign out</button>
+                <button id="quit" type="button" onclick="new config().withdrawn()">Withdraw</button>
+                <button id="sign-out" type="button" onclick="leave()">Sign out</button>
             </div>
         </div>
         <div class="game-area">
@@ -72,7 +72,7 @@
                 <form>
                     <input type="text" placeholder="Username" id="username">
                     <input type="password" placeholder="Password" id="password">
-                    <button type="button" onclick="new login(username, password).register()">Register</button>
+                    <button type="button" onclick="register()">Register / Login</button>
                 </form>
             </div>
             <div id="config">
@@ -82,6 +82,11 @@
                         <option value="computer">Computer</option>
                         <option value="user">User</option>
                     </select>
+                </form>
+                <button class="begin-game" type="button" onclick="new config().next()">Next!</button>
+            </div>
+            <div id="singleplayer">
+                <form>
                     <label for="color">Choose a color:</label>
                     <select name="color" id="color">
                         <option value="dark">Dark</option>
@@ -93,7 +98,7 @@
                         <option value="medium">Medium</option>
                     </select>
                 </form>
-                <button class="begin-game" type="button" onclick="new config().beginNewGame()">Start!</button>
+                <button class="begin-game" type="button" onclick="new config().singleplayerStart()">Next!</button>
             </div>
             <div id="game-commands">
                 <h2 id="color-played"></h2>

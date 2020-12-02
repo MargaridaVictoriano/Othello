@@ -80,7 +80,7 @@ function drawTable2() {
             if (canPlay2(i, j, player, opponent) && currentBoard[i][j] === "empty") {
                 currentBoard[i][j] = "playable";
             }
-            if (!(canPlay2(i, j, player, opponent)) && currentBoard[i][j] === 3 && currentBoard[i][j] !== "dark" && currentBoard[i][j] !== "light") {
+            if (!(canPlay2(i, j, player, opponent)) && currentBoard[i][j] === "playable" && currentBoard[i][j] !== "dark" && currentBoard[i][j] !== "light") {
                 currentBoard[i][j] = "empty";
             }
             const piece = document.createElement("div");
