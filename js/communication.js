@@ -18,13 +18,17 @@ function register() {
         .then(function (data) {
             if (data !== "{}") {
                 message("User registered with a different password.");
+                new login().start();
+            } else {
+                // Removes fail to login message
+                removeDivs("message");
+                // Joins
+                join();
             }
         })
         .catch(function (error) {
             return;
         });
-
-    join();
 }
 
 function join() {
