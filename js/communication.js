@@ -55,12 +55,14 @@ function join() {
                 player = "light";
             }
 
+            new online().start();
             update();
-            new config().start();
         })
         .catch(function (error) {
             return;
         });
+
+    new animations().loading();
 }
 
 function update() {
@@ -81,7 +83,6 @@ function update() {
             message("Winner is: " + obj.winner);
 
             eventSource.close();
-            new online().start();
             register();
             return;
         }
@@ -93,6 +94,8 @@ function update() {
         }
 
         drawTable2();
+        new animations().close("loading");
+        removeDivs("loading");
     }
 }
 

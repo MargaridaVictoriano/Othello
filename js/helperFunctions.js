@@ -203,35 +203,3 @@ function checkTurn() {
         }
     }
 }
-
-// overlays an element
-class pop {
-    close(element) {
-        let domElement = document.getElementById(element);
-        let op = 1;  // initial opacity
-        const timer = setInterval(function () {
-            if (op <= 0.1) {
-                clearInterval(timer);
-                domElement.style.display = 'none';
-            }
-            domElement.style.opacity = op;
-            domElement.style.filter = 'alpha(opacity=' + op * 100 + ")";
-            op -= op * 0.5;
-        }, 50);
-    }
-
-    open(element) {
-        let domElement = document.getElementById(element);
-        domElement.style.display = 'block';
-        let op = 0.1;  // initial opacity
-        domElement.classList.replace("close", "open");
-        const timer = setInterval(function () {
-            if (op >= 1) {
-                clearInterval(timer);
-            }
-            domElement.style.opacity = op;
-            domElement.style.filter = 'alpha(opacity=' + op * 100 + ")";
-            op += op * 0.1;
-        }, 10);
-    }
-}

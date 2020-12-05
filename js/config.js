@@ -17,7 +17,6 @@ class config {
 
     // Show configuration page
     start() {
-        this.userDom.innerHTML = nick;
         this.userDom.style.display = "block";
         this.signDom.style.display = "block";
         this.loginDom.style.display = "none";
@@ -26,14 +25,12 @@ class config {
         this.tableDom.style.display = "none";
         this.commandsDom.style.display = "none";
         this.singleDom.style.display = "none";
-    }
 
-    next() {
         if (this.versus === "computer") {
             this.singleDom.style.display = "flex";
             this.configurationDom.style.display = "none";
         } else if (this.versus === "user") {
-            new online().start();
+            new login().start();
         }
     }
 

@@ -13,6 +13,7 @@
     <script src="js/playAction.js"></script>
     <script src="js/winCounting.js"></script>
     <script src="js/communication.js"></script>
+    <script src="js/animations.js"></script>
 </head>
 <body>
     <div class="container">
@@ -33,7 +34,7 @@
                 <li>One player wins, by making his color dominant on the board.</li>
                 <li>The players agree to finish the game (as a resignation, or a draw). </li>
             </ul>
-            <button id="close-instr" type="button" onclick="new pop().close('instr')">Close</button>
+            <button id="close-instr" type="button" onclick="new animations().close('instr')">Close</button>
         </div>
 
         <div id="message" class="close">
@@ -44,7 +45,7 @@
             <p id="white-classification">0</p>
             <h1>Blacks:</h1>
             <p id="black-classification">0</p>
-            <button id="close-classification" type="button" onclick="new pop().close('classification')">Close</button>
+            <button id="close-classification" type="button" onclick="new animations().close('classification')">Close</button>
         </div>
 
         <div id="ranking" class="close">
@@ -56,6 +57,10 @@
                     <th>Wins</th>
                 </tr>
             </table>
+            <button id="close-ranking" type="button" onclick="new animations().close('ranking')">Close</button>
+        </div>
+
+        <div id="loading" class="close">
         </div>
 
         <div class="header">
@@ -83,7 +88,7 @@
                         <option value="user">User</option>
                     </select>
                 </form>
-                <button class="begin-game" type="button" onclick="new config().next()">Next!</button>
+                <button class="begin-game" type="button" onclick="new config().start()">Next!</button>
             </div>
             <div id="singleplayer">
                 <form>
@@ -102,14 +107,13 @@
             </div>
             <div id="game-commands">
                 <h2 id="color-played"></h2>
-                <button id="open-classification" type="button" onclick="new pop().open('classification')">Classification</button>
-                <button id="open-instr" type="button" onclick="new pop().open('instr')">Instructions</button>
+                <button id="open-classification" type="button" onclick="new animations().open('classification')">Classification</button>
+                <button id="open-instr" type="button" onclick="new animations().open('instr')">Instructions</button>
             </div>
             <div id="table">
             </div>
         </div>
         <div class="messages">
-
         </div>
         <div class="footer">
             <h2>
