@@ -62,6 +62,9 @@ class animations {
         }
 
         this.open("message");
+        let text = document.createElement("h1");
+        text.textContent = "Waiting for player...";
+        loadDom.appendChild(text);
     }
 
     close(element) {
