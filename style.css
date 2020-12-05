@@ -64,6 +64,33 @@ li {
     list-style-type: circle;
 }
 
+table {
+    width: 100%;
+    border-radius: 1em;
+    background-color: var(--fg1);
+    border-collapse: collapse;
+    border-width: 2px;
+    border-color: var(--fg3);
+    border-style: solid;
+    color: var(--bg1);
+    text-align: center;
+}
+
+table td, table th {
+    border-width: 2px;
+    border-radius: 1em;
+    border-color: var(--fg3);
+    border-style: solid;
+    padding: 1em;
+}
+
+table thead {
+    background-color: var(--bg1);
+    color: var(--fg1);
+    font-family: 'Krona One', sans-serif;
+}
+
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -94,7 +121,7 @@ li {
 
 #sign-out,
 #quit,
-#ranking-button {
+#open-rank {
     display: none;
     margin-left: 1em;
 }
@@ -314,14 +341,6 @@ button {
     color: var(--fg1);
 }
 
-/* MESSAGES */
-#message {
-    text-align: center;
-    width: 20% !important;
-    margin-left: 40%;
-    margin-right: 40%;
-}
-
 /* RESPONSIVE */
 @media only screen and (max-width: 1000px) {
     #config,
@@ -356,19 +375,6 @@ button {
         float: left;
         display: flex;
         justify-content: center;
-    }
-
-    #classification {
-        width: 30% !important;
-        margin-left: 35% !important;
-        margin-right: 35% !important;
-    }
-
-    #message {
-        text-align: center;
-        width: 40% !important;
-        margin-left: 30%;
-        margin-right: 30%;
     }
 }
 
@@ -423,23 +429,5 @@ button {
         float: left;
         display: flex;
         justify-content: center;
-    }
-
-    #instr {
-        width: 80% !important;
-        margin-left: 10% !important;
-        margin-right: 10% !important;
-    }
-    #classification {
-        width: 50% !important;
-        margin-left: 25% !important;
-        margin-right: 25% !important;
-    }
-
-    #message {
-        text-align: center;
-        width: 60% !important;
-        margin-left: 20%;
-        margin-right: 20%;
     }
 }

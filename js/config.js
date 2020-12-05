@@ -13,23 +13,29 @@ class config {
         this.signDom = document.getElementById("sign-out");
         this.loginDom = document.getElementById("login");
         this.singleDom = document.getElementById("singleplayer");
+        this.rankDom = document.getElementById("open-rank");
     }
 
     // Show configuration page
     start() {
-        this.userDom.style.display = "block";
-        this.signDom.style.display = "block";
+        document.getElementById('versus').selectedIndex = -1;
+        isOnline = false;
+
+        this.signDom.style.display = "none";
         this.loginDom.style.display = "none";
-        this.configurationDom.style.display = "flex";
         this.withdrawDom.style.display = "none";
         this.tableDom.style.display = "none";
         this.commandsDom.style.display = "none";
         this.singleDom.style.display = "none";
+        this.configurationDom.style.display = "flex";
+        this.rankDom.style.display = "none";
+        this.userDom.style.display = "none";
 
         if (this.versus === "computer") {
             this.singleDom.style.display = "flex";
             this.configurationDom.style.display = "none";
         } else if (this.versus === "user") {
+            this.configurationDom.style.display = "none";
             new login().start();
         }
     }
@@ -40,6 +46,7 @@ class config {
         this.withdrawDom.style.display = "block";
         this.commandsDom.style.display = "flex";
         this.singleDom.style.display = "none";
+        this.signDom.style.display = "block";
 
         // Initialize new game
         winnerCount();
@@ -70,31 +77,30 @@ class config {
         this.colorPlayedDom.textContent = "Playing as: " + color;
     }
 
-    withdrawn() {
-        increment(opponent);
-        this.start();
-    }
-}
-
-class online {
-    constructor() {
-        this.loginDom = document.getElementById("login");  
-        this.configurationDom = document.getElementById("config");
-        this.withdrawDom = document.getElementById("quit");
-        this.commandsDom = document.getElementById("game-commands");
-        this.colorPlayedDom = document.getElementById("color-played");
-    }
-
-    start() {
-        isOnline = true;
-
-        // Hide Configuration, show game commands
+    onlineStart() {
+        // Hide Configuration, show game commands and user
+        this.userDom.style.display = "block";
+        this.signDom.style.display = "block";
         this.configurationDom.style.display = "none";
         this.withdrawDom.style.display = "block";
-        this.commandsDom.style.display = "flex";
         this.loginDom.style.display = "none";
+        this.rankDom.style.display = "block";
 
-        // Show player color selection
+        // Initialize new game
+        isOnline = true;
+        winnerCount();
+
+        // Show player color selection and name
         this.colorPlayedDom.textContent = "Playing as: " + color;
+        this.userDom.textContent = nick;
+    }
+
+    withdrawn() {
+        if (color === "light") {
+            increment("dark");
+        } else if (color === "dark") {
+            increment("light");
+        }
+        this.start();
     }
 }

@@ -49,25 +49,13 @@
         </div>
 
         <div id="ranking" class="close">
-            <table>
-                <tr>
-                    <th>Nick</th>
-                </tr>
-                <tr>
-                    <th>Wins</th>
-                </tr>
-            </table>
-            <button id="close-ranking" type="button" onclick="new animations().close('ranking')">Close</button>
-        </div>
-
-        <div id="loading" class="close">
         </div>
 
         <div class="header">
             <h1 id="title">Othello</h1>
             <div class="id">
                 <h1 id="uname"></h1>
-                <button id="ranking-button" type="button" onclick="ranking()">Ranking</button>
+                <button id="open-rank" type="button" onclick="ranking(); new animations().open('ranking')">Ranking</button>
                 <button id="quit" type="button" onclick="new config().withdrawn()">Withdraw</button>
                 <button id="sign-out" type="button" onclick="leave()">Sign out</button>
             </div>

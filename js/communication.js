@@ -17,7 +17,7 @@ function register() {
         })
         .then(function (data) {
             if (data !== "{}") {
-                window.alert("User registered with a different password.")
+                message("User registered with a different password.");
             }
         })
         .catch(function (error) {
@@ -55,7 +55,7 @@ function join() {
                 player = "light";
             }
 
-            new online().start();
+            new config().onlineStart();
             update();
         })
         .catch(function (error) {
@@ -76,14 +76,15 @@ function update() {
         if (obj.winner !== undefined) {
             if (nick === obj.winner) {
                 increment(player);
+                message("You are the winner!");
             }
             else {
                 increment(opponent);
+                message("You lost...");
             }
-            message("Winner is: " + obj.winner);
 
             eventSource.close();
-            register();
+            new config().start();
             return;
         }
 
@@ -93,9 +94,12 @@ function update() {
             notify(null);
         }
 
+        // removes any pop up when game is found
+        new animations().forceClose("message");
+        removeDivs("message");
+        // draws table and presents game commands
         drawTable2();
-        new animations().close("loading");
-        removeDivs("loading");
+        document.getElementById("game-commands").style.display = "flex";
     }
 }
 
@@ -141,8 +145,13 @@ function leave() {
             return;
         });
 
-    new login().start()
-    isOnline = false;
+    pointsWhite = 0;
+    pointsBlack = 0;
+    // removes any pop up
+    new animations().forceClose("message");
+    removeDivs("message");
+
+    new config().start();
 }
 
 function ranking() {
@@ -152,6 +161,10 @@ function ranking() {
     })
     .then(function (response) {
         return response.json();
+    })
+    .then(function (data) {
+        let rankList = data.ranking;
+        topRank(rankList);
     })
     .catch(function(error) {
         return;

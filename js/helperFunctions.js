@@ -10,6 +10,17 @@ function restartGame() {
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0]
     ];
+
+    currentBoard = [
+        ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+        ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+        ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+        ["empty", "empty", "empty", "light", "dark", "empty", "empty", "empty"],
+        ["empty", "empty", "empty", "dark", "light", "empty", "empty", "empty"],
+        ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+        ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+        ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"]
+    ];
 }
 
 // Removes all children of a div
@@ -129,6 +140,10 @@ function hasMoves(playerToCheck, opponentToCheck) {
 
 // pops a new message
 function message(string) {
+    // removes prior message or animation
+    new animations().forceClose("message");
+    removeDivs("message");
+    // create new
     let messageDom = document.getElementById("message");
     removeDivs("message");
     let warning = document.createElement("h1");
@@ -137,10 +152,10 @@ function message(string) {
     let curWarning = document.getElementById("warning");
     let button = document.createElement("button");
     messageDom.appendChild(button);
-    button.setAttribute("onclick", "new pop().close('message')");
+    button.setAttribute("onclick", "new animations().close('message')");
     button.textContent = "Close";
     curWarning.textContent = string;
-    new pop().open('message');
+    new animations().open('message');
 }
 
 // checks if anyone can move
@@ -202,4 +217,47 @@ function checkTurn() {
             gameReset();
         }
     }
+}
+
+function topRank(array) {
+    removeDivs("ranking");
+    const table = document.createElement('table');
+    const head = document.createElement('thead');
+    const firstRow = document.createElement('tr');
+    const names = document.createElement('th');
+    names.textContent = "Nickname";
+    const victories = document.createElement('th');
+    victories.textContent = "Victories";
+    const games = document.createElement('th');
+    games.textContent = "Games Played";
+    firstRow.appendChild(names);
+    firstRow.appendChild(victories);
+    firstRow.appendChild(games);
+    head.appendChild(firstRow);
+    table.appendChild(head);
+
+    for (let i = 0; i < 10; i++) {
+        const row = document.createElement('tr');
+
+        const cell1 = document.createElement('td');
+        cell1.textContent = array[i].nick;
+
+        const cell2 = document.createElement('td');
+        cell2.textContent = array[i].victories;
+
+        const cell3 = document.createElement('td');
+        cell3.textContent = array[i].games;
+
+        row.appendChild(cell1);
+        row.appendChild(cell2);
+        row.appendChild(cell3);
+
+        table.appendChild(row);
+    }
+
+    document.getElementById("ranking").appendChild(table);
+    let button = document.createElement("button");
+    document.getElementById("ranking").appendChild(button);
+    button.setAttribute("onclick", "new animations().close('ranking')");
+    button.textContent = "Close";
 }

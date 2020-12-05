@@ -13,7 +13,7 @@ class actorPlay {
                 drawTable2();
                 notify(posI, posJ);
             } else {
-                alert("NOT YOUR TURN!");
+                message("NOT YOUR TURN!");
             }
         }
         else if (!isOnline) {

@@ -1,7 +1,7 @@
 class animations {
     loading() {
         const canvas = document.createElement("canvas");
-        const loadDom = document.getElementById("loading");
+        const loadDom = document.getElementById("message");
         canvas.width = 200;
         canvas.height = 200;
         loadDom.appendChild(canvas);
@@ -61,7 +61,7 @@ class animations {
             return 1 - ((1 - x) * (1 - x));
         }
 
-        this.open("loading");
+        this.open("message");
     }
 
     close(element) {
@@ -76,6 +76,13 @@ class animations {
             domElement.style.filter = 'alpha(opacity=' + op * 100 + ")";
             op -= op * 0.5;
         }, 50);
+        clearTimeout();
+    }
+
+    forceClose(element) {
+        let domElement = document.getElementById(element);
+        domElement.style.display = 'none';
+        clearTimeout();
     }
 
     open(element) {

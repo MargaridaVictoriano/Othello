@@ -30,28 +30,22 @@ function punctuation() {
             }
         }
         if (nWhites >= nBlacks) {
-            increment("white");
+            increment("light");
         }
         if (nBlacks >= nWhites) {
-            increment("black");
+            increment("dark");
         }
     }
+
+    winnerCount();
 }
 
 // increments points
 function increment(winner) {
-    if (isOnline) {
-        if (winner === "light") {
-            pointsWhite += 1;
-        } else if (winner === "dark") {
-            pointsBlack += 1;
-        }
-    } else if(!isOnline) {
-        if (winner === "white") {
-            pointsWhite += 1;
-        } else if (winner === "black") {
-            pointsBlack += 1;
-        }
+    if (winner === "light") {
+        pointsWhite += 1;
+    } else if (winner === "dark") {
+        pointsBlack += 1;
     }
     winnerCount();
 }
