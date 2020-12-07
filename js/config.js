@@ -46,7 +46,7 @@ class config {
         this.withdrawDom.style.display = "block";
         this.commandsDom.style.display = "flex";
         this.singleDom.style.display = "none";
-        this.signDom.style.display = "block";
+        this.signDom.style.display = "none";
 
         // Initialize new game
         winnerCount();
@@ -84,6 +84,7 @@ class config {
         this.configurationDom.style.display = "none";
         this.withdrawDom.style.display = "block";
         this.loginDom.style.display = "none";
+        this.withdrawDom.style.display = "none";
         this.rankDom.style.display = "block";
 
         // Initialize new game
@@ -101,6 +102,10 @@ class config {
         } else if (color === "dark") {
             increment("light");
         }
+
+        if (isOnline)
+            leave();
+
         this.start();
     }
 }

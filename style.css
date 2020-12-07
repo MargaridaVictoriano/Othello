@@ -280,11 +280,6 @@ table thead {
     width: 100%;
 }
 
-#config button,
-#singleplayer button {
-    float: end;
-}
-
 #config {
     display: flex;
 }
