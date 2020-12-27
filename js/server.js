@@ -67,6 +67,7 @@ server.on('request', (req, res) => {
                             res.setHeader('Access-Control-Allow-Origin', '*');
 
                             var text = (chunk.toString('utf8'));
+                            console.log(text);
                             var userStatus = registerLogin(text);
                             var body = {};
                             if (userStatus != null) {
