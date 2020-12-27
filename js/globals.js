@@ -11,7 +11,7 @@ let group;
 let gameID;
 let isOnline = false;
 let turn;
-let url = "http://twserver.alunos.dcc.fc.up.pt:8008/";
+let url = "127.0.0.1:3000/";
 
 let discs = [
     [0, 0, 0, 0, 0, 0, 0, 0],
