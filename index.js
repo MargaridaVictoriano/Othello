@@ -52,6 +52,7 @@ function doGet(pathname, request, response) {
             updater.remember(response);
             setImmediate(() => updater.update(board.getBoard()));
             answer.style = 'sse';
+            // mandar o current board?
             break;
         default:
             answer.status = 400;
@@ -65,9 +66,6 @@ function doPost(pathname, request, response) {
     switch(pathname) {
         case '/leave':
             response.end(updater.forget(response));
-            break;
-        case '/reset':
-            response.end(users.ranking());
             break;
         case '/register':
             request.on('data',

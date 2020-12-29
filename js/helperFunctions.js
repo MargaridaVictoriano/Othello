@@ -236,7 +236,7 @@ function topRank(array) {
     head.appendChild(firstRow);
     table.appendChild(head);
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < array.length; i++) {
         const row = document.createElement('tr');
 
         const cell1 = document.createElement('td');

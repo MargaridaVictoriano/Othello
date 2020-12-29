@@ -68,18 +68,24 @@ function loadUsers() {
 }
 
 module.exports.ranking = function getRanking() {
-    return JSON.stringify({
-        "ranking": [
-            { "nick": "123", "victories": 350, "games": 623 },
-            { "nick": "a", "victories": 269, "games": 550 },
-            { "nick": "tati123", "victories": 249, "games": 441 },
-            { "nick": "admin", "victories": 220, "games": 318 },
-            { "nick": "adeus", "victories": 219, "games": 350 },
-            { "nick": "netcan", "victories": 205, "games": 414 },
-            { "nick": "ola", "victories": 201, "games": 461 },
-            { "nick": "Player 1", "victories": 192, "games": 372 },
-            { "nick": "Player 2", "victories": 183, "games": 369 },
-            { "nick": "duarte", "victories": 144, "games": 236 }
-        ]
-    })
+
+    function getSortOrder(prop) {
+        return function(a, b) {
+            if (a[prop] < b[prop]) {
+                return 1;
+            } else if (a[prop] > b[prop]) {
+                return -1;
+            }
+            return 0;
+        }
+    }
+
+    let response = users.sort(getSortOrder("victories"));
+    for (let i = 0; i < response.length; ++i)
+        delete response[i].pass;
+
+    let responseRank = {
+        ranking: response
+    };
+    return JSON.stringify(responseRank);
 }
