@@ -120,8 +120,7 @@ table thead {
 }
 
 #sign-out,
-#quit,
-#open-rank {
+#quit {
     display: none;
     margin-left: 1em;
 }

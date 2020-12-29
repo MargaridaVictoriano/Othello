@@ -28,7 +28,6 @@ class config {
         this.commandsDom.style.display = "none";
         this.singleDom.style.display = "none";
         this.configurationDom.style.display = "flex";
-        this.rankDom.style.display = "none";
         this.userDom.style.display = "none";
 
         if (this.versus === "computer") {

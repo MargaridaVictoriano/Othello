@@ -17,6 +17,7 @@ function register() {
         })
         .then(function (data) {
             if (data !== "{}") {
+                console.log(data);
                 message("User registered with a different password.");
                 new login().start();
             } else {
