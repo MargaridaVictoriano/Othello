@@ -1,6 +1,5 @@
 // modules and port
-const hostname = '127.0.0.1';
-const port = 3000;
+const port = 8101;
 let http = require('http');
 let url = require('url');
 let updater = require('./modules/updater.js');
@@ -41,9 +40,7 @@ server.on('request', (request, response) => {
     }
 });
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at http: //${hostname}:${port}/`);
-});
+server.listen(port);
 
 function doGet(pathname, request, response) {
     let answer = {};
@@ -73,7 +70,7 @@ function doPost(pathname, request, response) {
                     var text = (chunk.toString('utf8'));
                     console.log(text);
                     var userStatus = users.register(text);
-                    if (userStatus !== undefined) {
+                    if (userStatus === undefined) {
                         answer.status = 400;
                         answer.style = 'plain';
                         response.writeHead(answer.status, headers[answer.style]);

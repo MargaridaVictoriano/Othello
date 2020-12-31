@@ -18,20 +18,20 @@ module.exports.register = function registerLogin(text) {
         const userLoop = users[i];
         if (userLoop.nick === user.nick) {
             // user exist check password
-            console.log(userLoop.nick + " compares to " + user.nick);
+            console.log(userLoop.nick + " " + userLoop.pass + " compares to " + user.nick + " " + user.pass);
             if (userLoop.pass === user.pass) {
                 console.log(userLoop.pass + " compares to " + user.pass);
                 // user exist and right pass, all ok
-                return;
+                return "{}";
             } else if (userLoop.pass !== user.pass){
                 // user exist but wrong pass
-                return 400;
+                return undefined;
             }
         }
     }
     // user does not exist, make a new one
     addUser(user.nick, user.pass);
-    return;
+    return "{}";
 }
 
 function addUser(nick, pass) {
